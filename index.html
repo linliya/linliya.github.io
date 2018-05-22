@@ -308,16 +308,20 @@
 <li>通过全局对象获取<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//app.js</span><br><span class="line">App(&#123;</span><br><span class="line">  globalData: &#123;</span><br><span class="line">    userName: &apos;&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>然后在页面中，可以通过 getApp() 方法获取并设置app.js中的全局对象<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let app = getApp()</span><br><span class="line">let userName = app.globalData.userName</span><br><span class="line">app.globalData.userName = &apos;hello kitty&apos;</span><br></pre></td></tr></table></figure></p>
+<p>然后在页面中，可以通过 getApp() 方法获取并设置app.js中的全局对象</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let app = getApp()</span><br><span class="line">let userName = app.globalData.userName</span><br><span class="line">app.globalData.userName = &apos;hello kitty&apos;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>通过本地缓存设置和获取<br>小程序提供了<code>wx.setStorage</code>，<code>wx.getStorage</code>, <code>wx.removeStorage</code>等本地存储的api供我们使用, 具体请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/api/data.html#wxsetstorageobject" target="_blank" rel="noopener">官方文档</a>，通过这种方式一般存储的是一些不经常改变的静态变量</li>
-<li><p>通过url的query传值后在下一个页面的onLoad中获取<br>可以将数据附加在url中，如<code>/book?id=100</code>, 然后在下一个页面的onLoad中获取</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onLoad (option) &#123;</span><br><span class="line">  this.setData (&#123;id: option.id&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过getCurrentPages()获取</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">onLoad () &#123;</span><br><span class="line">  let pages = getCurrentPages()</span><br><span class="line">  let prevPage = pages[pages.length - 2]</span><br><span class="line">  this.setData(&#123;detail: prevPage.data.detail&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>通过本地缓存设置和获取</li>
 </ul>
+<p>小程序提供了<code>wx.setStorage</code>，<code>wx.getStorage</code>, <code>wx.removeStorage</code>等本地存储的api供我们使用, 具体请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/api/data.html#wxsetstorageobject" target="_blank" rel="noopener">官方文档</a>，通过这种方式一般存储的是一些不经常改变的静态变量</p>
+<ul>
+<li>通过url的query传值后在下一个页面的onLoad中获取</li>
+</ul>
+<p>可以将数据附加在url中，如<code>/book?id=100</code>, 然后在下一个页面的onLoad中获取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onLoad (option) &#123;</span><br><span class="line">  this.setData (&#123;id: option.id&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>通过getCurrentPages()获取</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">onLoad () &#123;</span><br><span class="line">  let pages = getCurrentPages()</span><br><span class="line">  let prevPage = pages[pages.length - 2]</span><br><span class="line">  this.setData(&#123;detail: prevPage.data.detail&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>未完待续…</p>
 
           
