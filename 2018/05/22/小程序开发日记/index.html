@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="林莉的博客">
 <meta property="og:description" content="最近在学小程序开发，想做一个小demo练练手，边学边总结，希望能对以后想学的同学有点作用： request请求豆瓣图书接口报了403查资料后才知道豆瓣图书的接口对小程序不开放了…用了同事反向代理豆瓣api的接口才搞定的 request请求同事服务器的接口报了400通过wx.request请求资源时需要加上header头部123header: &amp;#123;  &amp;quot;Content-Type&amp;q">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-22T09:26:01.003Z">
+<meta property="og:updated_time" content="2018-05-22T09:27:10.089Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小程序开发日记">
 <meta name="twitter:description" content="最近在学小程序开发，想做一个小demo练练手，边学边总结，希望能对以后想学的同学有点作用： request请求豆瓣图书接口报了403查资料后才知道豆瓣图书的接口对小程序不开放了…用了同事反向代理豆瓣api的接口才搞定的 request请求同事服务器的接口报了400通过wx.request请求资源时需要加上header头部123header: &amp;#123;  &amp;quot;Content-Type&amp;q">
@@ -304,11 +304,11 @@
 <h4 id="request请求同事服务器的接口报了400"><a href="#request请求同事服务器的接口报了400" class="headerlink" title="request请求同事服务器的接口报了400"></a>request请求同事服务器的接口报了400</h4><p>通过wx.request请求资源时需要加上header头部<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">header: &#123;</span><br><span class="line">  &quot;Content-Type&quot;: &quot;json&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">header: &#123;</span><br><span class="line">  &quot;Content-Type&quot;: &quot;application-json&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="如何将上一个页面的数据传递给跳转到的下一个页面"><a href="#如何将上一个页面的数据传递给跳转到的下一个页面" class="headerlink" title="如何将上一个页面的数据传递给跳转到的下一个页面"></a>如何将上一个页面的数据传递给跳转到的下一个页面</h4><ul>
-<li>通过全局对象获取<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//app.js</span><br><span class="line">App(&#123;</span><br><span class="line">  globalData: &#123;</span><br><span class="line">    userName: &apos;&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
+<li>通过全局对象获取</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//app.js</span><br><span class="line">App(&#123;</span><br><span class="line">  globalData: &#123;</span><br><span class="line">    userName: &apos;&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>然后在页面中，可以通过 getApp() 方法获取并设置app.js中的全局对象</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let app = getApp()</span><br><span class="line">let userName = app.globalData.userName</span><br><span class="line">app.globalData.userName = &apos;hello kitty&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let app = getApp()</span><br><span class="line">let userName = app.globalData.userName</span><br><span class="line">app.globalData.userName = &apos;hello kitty&apos;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>通过本地缓存设置和获取</li>
 </ul>
