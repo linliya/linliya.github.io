@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="实现思路： 下载obs软件，进行视频的录制 通过node-media-server开启一个服务，在obs中推流到该服务器 通过flv.js配合html5的video标签实现node-media-server中视频源的播放  开始实现obs的使用obs的下载请移步官网，有windows, mac, linux 三个平台的版本可供下载我这里使用的是mac版，其他版本的使用应该也差不多  首先需要新建一">
+<meta name="description" content="实现思路 下载obs软件，进行视频的录制 通过node-media-server开启一个服务，在obs中推流到该服务器 通过flv.js配合html5的video标签实现node-media-server中视频源的播放  开始实现obs的使用obs的下载请移步官网，有windows, mac, linux 三个平台的版本可供下载我这里使用的是mac版，其他版本的使用应该也差不多  首先需要新建一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="obs+node-media-server+flv.js实现录播和直播">
 <meta property="og:url" content="http://yoursite.com/2018/05/22/obs-node-media-server-flv-js实现录播和直播/index.html">
 <meta property="og:site_name" content="林莉的博客">
-<meta property="og:description" content="实现思路： 下载obs软件，进行视频的录制 通过node-media-server开启一个服务，在obs中推流到该服务器 通过flv.js配合html5的video标签实现node-media-server中视频源的播放  开始实现obs的使用obs的下载请移步官网，有windows, mac, linux 三个平台的版本可供下载我这里使用的是mac版，其他版本的使用应该也差不多  首先需要新建一">
+<meta property="og:description" content="实现思路 下载obs软件，进行视频的录制 通过node-media-server开启一个服务，在obs中推流到该服务器 通过flv.js配合html5的video标签实现node-media-server中视频源的播放  开始实现obs的使用obs的下载请移步官网，有windows, mac, linux 三个平台的版本可供下载我这里使用的是mac版，其他版本的使用应该也差不多  首先需要新建一个">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11543643-e3898c40c5fdf380.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11543643-832208bc792de999.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -93,10 +93,10 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11543643-9472617ff06096a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11543643-4896159d8e19ce11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11543643-2aa25cf702854ee5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-05-22T09:14:03.986Z">
+<meta property="og:updated_time" content="2018-05-22T09:15:40.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="obs+node-media-server+flv.js实现录播和直播">
-<meta name="twitter:description" content="实现思路： 下载obs软件，进行视频的录制 通过node-media-server开启一个服务，在obs中推流到该服务器 通过flv.js配合html5的video标签实现node-media-server中视频源的播放  开始实现obs的使用obs的下载请移步官网，有windows, mac, linux 三个平台的版本可供下载我这里使用的是mac版，其他版本的使用应该也差不多  首先需要新建一">
+<meta name="twitter:description" content="实现思路 下载obs软件，进行视频的录制 通过node-media-server开启一个服务，在obs中推流到该服务器 通过flv.js配合html5的video标签实现node-media-server中视频源的播放  开始实现obs的使用obs的下载请移步官网，有windows, mac, linux 三个平台的版本可供下载我这里使用的是mac版，其他版本的使用应该也差不多  首先需要新建一个">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/11543643-e3898c40c5fdf380.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -307,7 +307,7 @@
       
 
       
-        <h3 id="实现思路："><a href="#实现思路：" class="headerlink" title="实现思路："></a>实现思路：</h3><ul>
+        <h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><ul>
 <li>下载obs软件，进行视频的录制</li>
 <li>通过node-media-server开启一个服务，在obs中推流到该服务器</li>
 <li>通过flv.js配合html5的video标签实现node-media-server中视频源的播放</li>
@@ -516,7 +516,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现思路："><span class="nav-number">1.</span> <span class="nav-text">实现思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始实现"><span class="nav-number">2.</span> <span class="nav-text">开始实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#obs的使用"><span class="nav-number">2.1.</span> <span class="nav-text">obs的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node-media-server开启服务"><span class="nav-number">2.2.</span> <span class="nav-text">node-media-server开启服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flv-js"><span class="nav-number">2.3.</span> <span class="nav-text">flv.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可以进行录播啦"><span class="nav-number">2.4.</span> <span class="nav-text">可以进行录播啦~</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现思路"><span class="nav-number">1.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始实现"><span class="nav-number">2.</span> <span class="nav-text">开始实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#obs的使用"><span class="nav-number">2.1.</span> <span class="nav-text">obs的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node-media-server开启服务"><span class="nav-number">2.2.</span> <span class="nav-text">node-media-server开启服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flv-js"><span class="nav-number">2.3.</span> <span class="nav-text">flv.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可以进行录播啦"><span class="nav-number">2.4.</span> <span class="nav-text">可以进行录播啦~</span></a></li></ol></li></ol></div>
             
 
           </div>
