@@ -306,8 +306,8 @@
 <li>通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src</li>
 </ul>
 <h3 id="offsetTop方式"><a href="#offsetTop方式" class="headerlink" title="offsetTop方式"></a>offsetTop方式</h3><p>图片出现在视窗内的情况：<br>offsetTop &lt; clientHeight + scrollTop</p>
-<h3 id="getBoundingClientRect方式"><a href="#getBoundingClientRect方式" class="headerlink" title="getBoundingClientRect方式"></a>getBoundingClientRect方式</h3><p>图片出现在视窗内的情况：<br>element.getBoundingClientRect().top &lt; clientHeightf</p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f0988f351ecca?imageslim" alt=""></p>
+<h3 id="getBoundingClientRect方式"><a href="#getBoundingClientRect方式" class="headerlink" title="getBoundingClientRect方式"></a>getBoundingClientRect方式</h3><p>图片出现在视窗内的情况：<br>element.getBoundingClientRect().top &lt; clientHeightf</p>
 <h3 id="h5的IntersectionObserver方式"><a href="#h5的IntersectionObserver方式" class="headerlink" title="h5的IntersectionObserver方式"></a>h5的IntersectionObserver方式</h3><ul>
 <li>intersectionRatio：目标元素的可见比例，即 intersectionRect 占 boundingClientRect 的比例，完全可见时为 1 ，完全不可见时小于等于 0</li>
 </ul>

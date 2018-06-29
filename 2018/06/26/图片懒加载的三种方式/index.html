@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="实现思路 在页面放置img标签 给img图片加上alt, width, height 和 data-src 通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src  offsetTop方式图片出现在视窗内的情况：offsetTop &amp;lt; clientHeight + scrollTop getBoundingClientRect方式图片出现在视窗内的情况：elem">
+<meta name="description" content="实现思路 在页面放置img标签 给img图片加上alt, width, height 和 data-src 通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src  offsetTop方式图片出现在视窗内的情况：offsetTop &amp;lt; clientHeight + scrollTop  getBoundingClientRect方式图片出现在视窗内的情况：ele">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图片懒加载的三种方式">
 <meta property="og:url" content="http://yoursite.com/2018/06/26/图片懒加载的三种方式/index.html">
 <meta property="og:site_name" content="林莉的博客">
-<meta property="og:description" content="实现思路 在页面放置img标签 给img图片加上alt, width, height 和 data-src 通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src  offsetTop方式图片出现在视窗内的情况：offsetTop &amp;lt; clientHeight + scrollTop getBoundingClientRect方式图片出现在视窗内的情况：elem">
+<meta property="og:description" content="实现思路 在页面放置img标签 给img图片加上alt, width, height 和 data-src 通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src  offsetTop方式图片出现在视窗内的情况：offsetTop &amp;lt; clientHeight + scrollTop  getBoundingClientRect方式图片出现在视窗内的情况：ele">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/23/162f0988f351ecca?imageslim">
-<meta property="og:updated_time" content="2018-06-26T09:39:58.449Z">
+<meta property="og:updated_time" content="2018-06-29T03:06:23.422Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图片懒加载的三种方式">
-<meta name="twitter:description" content="实现思路 在页面放置img标签 给img图片加上alt, width, height 和 data-src 通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src  offsetTop方式图片出现在视窗内的情况：offsetTop &amp;lt; clientHeight + scrollTop getBoundingClientRect方式图片出现在视窗内的情况：elem">
+<meta name="twitter:description" content="实现思路 在页面放置img标签 给img图片加上alt, width, height 和 data-src 通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src  offsetTop方式图片出现在视窗内的情况：offsetTop &amp;lt; clientHeight + scrollTop  getBoundingClientRect方式图片出现在视窗内的情况：ele">
 <meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/4/23/162f0988f351ecca?imageslim">
 
 
@@ -307,8 +307,8 @@
 <li>通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src</li>
 </ul>
 <h3 id="offsetTop方式"><a href="#offsetTop方式" class="headerlink" title="offsetTop方式"></a>offsetTop方式</h3><p>图片出现在视窗内的情况：<br>offsetTop &lt; clientHeight + scrollTop</p>
-<h3 id="getBoundingClientRect方式"><a href="#getBoundingClientRect方式" class="headerlink" title="getBoundingClientRect方式"></a>getBoundingClientRect方式</h3><p>图片出现在视窗内的情况：<br>element.getBoundingClientRect().top &lt; clientHeightf</p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f0988f351ecca?imageslim" alt=""></p>
+<h3 id="getBoundingClientRect方式"><a href="#getBoundingClientRect方式" class="headerlink" title="getBoundingClientRect方式"></a>getBoundingClientRect方式</h3><p>图片出现在视窗内的情况：<br>element.getBoundingClientRect().top &lt; clientHeightf</p>
 <h3 id="h5的IntersectionObserver方式"><a href="#h5的IntersectionObserver方式" class="headerlink" title="h5的IntersectionObserver方式"></a>h5的IntersectionObserver方式</h3><ul>
 <li>intersectionRatio：目标元素的可见比例，即 intersectionRect 占 boundingClientRect 的比例，完全可见时为 1 ，完全不可见时小于等于 0</li>
 </ul>
