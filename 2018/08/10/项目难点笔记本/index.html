@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="最近在学小程序开发，想做一个小demo练练手，边学边总结，希望能对以后想学的同学有点作用： request请求豆瓣图书接口报了403查资料后才知道豆瓣图书的接口对小程序不开放了…用了同事反向代理豆瓣api的接口才搞定的 request请求同事服务器的接口报了400通过wx.request请求资源时需要加上header头部123header: &amp;#123;  &amp;quot;Content-Type&amp;q">
+<meta name="description" content="h264解码在做h264解码的过程，一开始是想利用broadway.js这个项目，让后台通过websocket将h264数据一帧一帧地传给我们，我们来完成前端解码的工作，但是因为该项目文档并不是很清楚，所以我们解码一直没成功，也没有报错，所以我们转战其它类似的项目，h264bsd是一个基于broadway.js的一个项目，但它的文档相对比较清楚，也有例子，我们就再试了一下，这时试的是一整个h264">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小程序开发日记">
-<meta property="og:url" content="http://yoursite.com/2018/05/22/小程序开发日记/index.html">
+<meta property="og:title" content="项目难点笔记本">
+<meta property="og:url" content="http://yoursite.com/2018/08/10/项目难点笔记本/index.html">
 <meta property="og:site_name" content="林莉的博客">
-<meta property="og:description" content="最近在学小程序开发，想做一个小demo练练手，边学边总结，希望能对以后想学的同学有点作用： request请求豆瓣图书接口报了403查资料后才知道豆瓣图书的接口对小程序不开放了…用了同事反向代理豆瓣api的接口才搞定的 request请求同事服务器的接口报了400通过wx.request请求资源时需要加上header头部123header: &amp;#123;  &amp;quot;Content-Type&amp;q">
+<meta property="og:description" content="h264解码在做h264解码的过程，一开始是想利用broadway.js这个项目，让后台通过websocket将h264数据一帧一帧地传给我们，我们来完成前端解码的工作，但是因为该项目文档并不是很清楚，所以我们解码一直没成功，也没有报错，所以我们转战其它类似的项目，h264bsd是一个基于broadway.js的一个项目，但它的文档相对比较清楚，也有例子，我们就再试了一下，这时试的是一整个h264">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-22T09:28:05.747Z">
+<meta property="og:updated_time" content="2018-08-10T05:41:06.223Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小程序开发日记">
-<meta name="twitter:description" content="最近在学小程序开发，想做一个小demo练练手，边学边总结，希望能对以后想学的同学有点作用： request请求豆瓣图书接口报了403查资料后才知道豆瓣图书的接口对小程序不开放了…用了同事反向代理豆瓣api的接口才搞定的 request请求同事服务器的接口报了400通过wx.request请求资源时需要加上header头部123header: &amp;#123;  &amp;quot;Content-Type&amp;q">
+<meta name="twitter:title" content="项目难点笔记本">
+<meta name="twitter:description" content="h264解码在做h264解码的过程，一开始是想利用broadway.js这个项目，让后台通过websocket将h264数据一帧一帧地传给我们，我们来完成前端解码的工作，但是因为该项目文档并不是很清楚，所以我们解码一直没成功，也没有报错，所以我们转战其它类似的项目，h264bsd是一个基于broadway.js的一个项目，但它的文档相对比较清楚，也有例子，我们就再试了一下，这时试的是一整个h264">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/22/小程序开发日记/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/10/项目难点笔记本/"/>
 
 
 
 
 
-  <title>小程序开发日记 | 林莉的博客</title>
+  <title>项目难点笔记本 | 林莉的博客</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/小程序开发日记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/10/项目难点笔记本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="linli">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">小程序开发日记</h1>
+          <h1 class="post-title" itemprop="name headline">项目难点笔记本</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T17:16:55+08:00">
-                2018-05-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-10T13:40:58+08:00">
+                2018-08-10
               </time>
             
 
@@ -299,29 +299,19 @@
       
 
       
-        <p>最近在学小程序开发，想做一个小demo练练手，边学边总结，希望能对以后想学的同学有点作用：</p>
-<h4 id="request请求豆瓣图书接口报了403"><a href="#request请求豆瓣图书接口报了403" class="headerlink" title="request请求豆瓣图书接口报了403"></a>request请求豆瓣图书接口报了403</h4><p>查资料后才知道豆瓣图书的接口对小程序不开放了…用了同事反向代理豆瓣api的接口才搞定的</p>
-<h4 id="request请求同事服务器的接口报了400"><a href="#request请求同事服务器的接口报了400" class="headerlink" title="request请求同事服务器的接口报了400"></a>request请求同事服务器的接口报了400</h4><p>通过wx.request请求资源时需要加上header头部<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">header: &#123;</span><br><span class="line">  &quot;Content-Type&quot;: &quot;json&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">header: &#123;</span><br><span class="line">  &quot;Content-Type&quot;: &quot;application-json&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="如何将上一个页面的数据传递给跳转到的下一个页面"><a href="#如何将上一个页面的数据传递给跳转到的下一个页面" class="headerlink" title="如何将上一个页面的数据传递给跳转到的下一个页面"></a>如何将上一个页面的数据传递给跳转到的下一个页面</h4><ul>
-<li>通过全局对象获取</li>
+        <h3 id="h264解码"><a href="#h264解码" class="headerlink" title="h264解码"></a>h264解码</h3><p>在做h264解码的过程，一开始是想利用broadway.js这个项目，让后台通过websocket将h264数据一帧一帧地传给我们，我们来完成前端解码的工作，但是因为该项目文档并不是很清楚，所以我们解码一直没成功，也没有报错，所以我们转战其它类似的项目，h264bsd是一个基于broadway.js的一个项目，但它的文档相对比较清楚，也有例子，我们就再试了一下，这时试的是一整个h264的文件，而不是一帧帧的数据，而且，后台也提供了两个压缩率不同的h264文件，这次终于解码成功了，压缩率为baseline类型的成功了，压缩率为high的同样没有解码成功，于是我们终于找到问题的所在，压缩率这个问题导致解码器一直没有解码成功</p>
+<p>这里的压缩率其实是指压缩过程i帧的比例,baseline的i帧比较多，high压缩的p帧比较多</p>
+<p>H264压缩技术主要采用了以下几种方法对视频数据进行压缩。包括：</p>
+<p>帧内预测压缩，解决的是空域数据冗余问题。<br>帧间预测压缩（运动估计与补偿），解决的是时域数据冗徐问题。<br>整数离散余弦变换（DCT），将空间上的相关性变为频域上无关的数据然后进行量化。<br>CABAC压缩。</p>
+<p>经过压缩后的帧分为：I帧，P帧和B帧:<br>I帧：关键帧，采用帧内压缩技术。<br>P帧：向前参考帧，在压缩时，只参考前面已经处理的帧。采用帧音压缩技术。<br>B帧：双向参考帧，在压缩时，它即参考前而的帧，又参考它后面的帧。采用帧间压缩技术</p>
+<p>还有一种常见的压缩，JPEG压缩，JPEG的有损压缩，损的是量化过程中的高频部分</p>
+<h3 id="不同分辨率canvas的处理问题"><a href="#不同分辨率canvas的处理问题" class="headerlink" title="不同分辨率canvas的处理问题"></a>不同分辨率canvas的处理问题</h3><p>通过css设定宽高解决</p>
+<h3 id="创建一个空文件并转成File格式上传到服务器"><a href="#创建一个空文件并转成File格式上传到服务器" class="headerlink" title="创建一个空文件并转成File格式上传到服务器"></a>创建一个空文件并转成File格式上传到服务器</h3><ul>
+<li>通过fs.openSync创建一个空的文件</li>
+<li>通过fs.readFile读取文件内容</li>
+<li>将读取到的文件内容传给一个Blob对象</li>
+<li>将Blob对象转成File格式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function getUploadFile(filePath) &#123;</span><br><span class="line">    fs.openSync(filePath, &apos;w&apos;)</span><br><span class="line">    </span><br><span class="line">    let file = fs.readFileSync(filePath)</span><br><span class="line">    </span><br><span class="line">    let b = new Blob([file], &#123;type: &apos;application/octet-stream&apos;&#125;)</span><br><span class="line">    let emptyFile = new File([b], filename)</span><br><span class="line"></span><br><span class="line">    #可以上传的File对象</span><br><span class="line">    return emptyFile  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//app.js</span><br><span class="line">App(&#123;</span><br><span class="line">  globalData: &#123;</span><br><span class="line">    userName: &apos;&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>然后在页面中，可以通过 getApp() 方法获取并设置app.js中的全局对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let app = getApp()</span><br><span class="line">let userName = app.globalData.userName</span><br><span class="line">app.globalData.userName = &apos;hello kitty&apos;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>通过本地缓存设置和获取</li>
-</ul>
-<p>小程序提供了<code>wx.setStorage</code>，<code>wx.getStorage</code>, <code>wx.removeStorage</code>等本地存储的api供我们使用, 具体请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/api/data.html#wxsetstorageobject" target="_blank" rel="noopener">官方文档</a>，通过这种方式一般存储的是一些不经常改变的静态变量</p>
-<ul>
-<li>通过url的query传值后在下一个页面的onLoad中获取</li>
-</ul>
-<p>可以将数据附加在url中，如<code>/book?id=100</code>, 然后在下一个页面的onLoad中获取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onLoad (option) &#123;</span><br><span class="line">  this.setData (&#123;id: option.id&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>通过getCurrentPages()获取</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">onLoad () &#123;</span><br><span class="line">  let pages = getCurrentPages()</span><br><span class="line">  let prevPage = pages[pages.length - 2]</span><br><span class="line">  this.setData(&#123;detail: prevPage.data.detail&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>未完待续…</p>
 
       
     </div>
@@ -346,8 +336,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/22/obs-node-media-server-flv-js实现录播和直播/" rel="next" title="obs+node-media-server+flv.js实现录播和直播">
-                <i class="fa fa-chevron-left"></i> obs+node-media-server+flv.js实现录播和直播
+              <a href="/2018/08/05/element树形控件踩坑日记/" rel="next" title="element树形控件踩坑日记">
+                <i class="fa fa-chevron-left"></i> element树形控件踩坑日记
               </a>
             
           </div>
@@ -355,10 +345,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/26/图片懒加载的三种方式/" rel="prev" title="图片懒加载的三种方式">
-                图片懒加载的三种方式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -491,7 +477,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#request请求豆瓣图书接口报了403"><span class="nav-number">1.</span> <span class="nav-text">request请求豆瓣图书接口报了403</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#request请求同事服务器的接口报了400"><span class="nav-number">2.</span> <span class="nav-text">request请求同事服务器的接口报了400</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何将上一个页面的数据传递给跳转到的下一个页面"><span class="nav-number">3.</span> <span class="nav-text">如何将上一个页面的数据传递给跳转到的下一个页面</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#h264解码"><span class="nav-number">1.</span> <span class="nav-text">h264解码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同分辨率canvas的处理问题"><span class="nav-number">2.</span> <span class="nav-text">不同分辨率canvas的处理问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个空文件并转成File格式上传到服务器"><span class="nav-number">3.</span> <span class="nav-text">创建一个空文件并转成File格式上传到服务器</span></a></li></ol></div>
             
 
           </div>

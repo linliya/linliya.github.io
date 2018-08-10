@@ -229,6 +229,138 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/10/项目难点笔记本/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="linli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林莉的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/10/项目难点笔记本/" itemprop="url">项目难点笔记本</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-10T13:40:58+08:00">
+                2018-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="h264解码"><a href="#h264解码" class="headerlink" title="h264解码"></a>h264解码</h3><p>在做h264解码的过程，一开始是想利用broadway.js这个项目，让后台通过websocket将h264数据一帧一帧地传给我们，我们来完成前端解码的工作，但是因为该项目文档并不是很清楚，所以我们解码一直没成功，也没有报错，所以我们转战其它类似的项目，h264bsd是一个基于broadway.js的一个项目，但它的文档相对比较清楚，也有例子，我们就再试了一下，这时试的是一整个h264的文件，而不是一帧帧的数据，而且，后台也提供了两个压缩率不同的h264文件，这次终于解码成功了，压缩率为baseline类型的成功了，压缩率为high的同样没有解码成功，于是我们终于找到问题的所在，压缩率这个问题导致解码器一直没有解码成功</p>
+<p>这里的压缩率其实是指压缩过程i帧的比例,baseline的i帧比较多，high压缩的p帧比较多</p>
+<p>H264压缩技术主要采用了以下几种方法对视频数据进行压缩。包括：</p>
+<p>帧内预测压缩，解决的是空域数据冗余问题。<br>帧间预测压缩（运动估计与补偿），解决的是时域数据冗徐问题。<br>整数离散余弦变换（DCT），将空间上的相关性变为频域上无关的数据然后进行量化。<br>CABAC压缩。</p>
+<p>经过压缩后的帧分为：I帧，P帧和B帧:<br>I帧：关键帧，采用帧内压缩技术。<br>P帧：向前参考帧，在压缩时，只参考前面已经处理的帧。采用帧音压缩技术。<br>B帧：双向参考帧，在压缩时，它即参考前而的帧，又参考它后面的帧。采用帧间压缩技术</p>
+<p>还有一种常见的压缩，JPEG压缩，JPEG的有损压缩，损的是量化过程中的高频部分</p>
+<h3 id="不同分辨率canvas的处理问题"><a href="#不同分辨率canvas的处理问题" class="headerlink" title="不同分辨率canvas的处理问题"></a>不同分辨率canvas的处理问题</h3><p>通过css设定宽高解决</p>
+<h3 id="创建一个空文件并转成File格式上传到服务器"><a href="#创建一个空文件并转成File格式上传到服务器" class="headerlink" title="创建一个空文件并转成File格式上传到服务器"></a>创建一个空文件并转成File格式上传到服务器</h3><ul>
+<li>通过fs.openSync创建一个空的文件</li>
+<li>通过fs.readFile读取文件内容</li>
+<li>将读取到的文件内容传给一个Blob对象</li>
+<li>将Blob对象转成File格式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function getUploadFile(filePath) &#123;</span><br><span class="line">    fs.openSync(filePath, &apos;w&apos;)</span><br><span class="line">    </span><br><span class="line">    let file = fs.readFileSync(filePath)</span><br><span class="line">    </span><br><span class="line">    let b = new Blob([file], &#123;type: &apos;application/octet-stream&apos;&#125;)</span><br><span class="line">    let emptyFile = new File([b], filename)</span><br><span class="line"></span><br><span class="line">    #可以上传的File对象</span><br><span class="line">    return emptyFile  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/element树形控件踩坑日记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1680,7 +1812,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
