@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="blob是什么？blob, 即binary large object，二进制大对象，MDN上的定义是:  Blob 对象表示一个不可变、原始数据的类文件对象。Blob 表示的不一定是JavaScript原生格式的数据。File 接口基于Blob，继承了 blob 的功能并将其扩展使其支持用户系统上的文件  Blob 对象表示一个二进制文件的数据内容,可以看做是存放二进制数据的容器，一直以来，JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="林莉的博客">
+<meta property="og:url" content="http://yoursite.com/2018/09/09/byte & blob/index.html">
+<meta property="og:site_name" content="林莉的博客">
+<meta property="og:description" content="blob是什么？blob, 即binary large object，二进制大对象，MDN上的定义是:  Blob 对象表示一个不可变、原始数据的类文件对象。Blob 表示的不一定是JavaScript原生格式的数据。File 接口基于Blob，继承了 blob 的功能并将其扩展使其支持用户系统上的文件  Blob 对象表示一个二进制文件的数据内容,可以看做是存放二进制数据的容器，一直以来，JS">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/9/11/165c9258d942a92f?w=1456&h=998&f=jpeg&s=285954">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/9/12/165cc5d7d759e61d?w=846&h=470&f=png&s=33252">
+<meta property="og:updated_time" content="2018-09-12T06:54:30.320Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="林莉的博客">
+<meta name="twitter:description" content="blob是什么？blob, 即binary large object，二进制大对象，MDN上的定义是:  Blob 对象表示一个不可变、原始数据的类文件对象。Blob 表示的不一定是JavaScript原生格式的数据。File 接口基于Blob，继承了 blob 的功能并将其扩展使其支持用户系统上的文件  Blob 对象表示一个二进制文件的数据内容,可以看做是存放二进制数据的容器，一直以来，JS">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/9/11/165c9258d942a92f?w=1456&h=998&f=jpeg&s=285954">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/09/byte & blob/"/>
+
+
+
+
+
+  <title> | 林莉的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">林莉的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/09/byte & blob/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="linli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林莉的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-09T21:07:55+08:00">
+                2018-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://user-gold-cdn.xitu.io/2018/9/11/165c9258d942a92f?w=1456&amp;h=998&amp;f=jpeg&amp;s=285954" alt=""></p>
+<h3 id="blob是什么？"><a href="#blob是什么？" class="headerlink" title="blob是什么？"></a>blob是什么？</h3><p>blob, 即binary large object，二进制大对象，MDN上的定义是:</p>
+<blockquote>
+<p>Blob 对象表示一个不可变、原始数据的类文件对象。Blob 表示的不一定是JavaScript原生格式的数据。File 接口基于Blob，继承了 blob 的功能并将其扩展使其支持用户系统上的文件</p>
+</blockquote>
+<p>Blob 对象表示一个二进制文件的数据内容,可以看做是存放二进制数据的容器，一直以来，JS都没有比较好的可以直接处理二进制的方法。而Blob的出现，使我们可以通过JS直接操作二进制数据</p>
+<blockquote>
+<p>拓展: MySql/Oracle数据库中，有一种Blob类型，专门存放二进制数据</p>
+</blockquote>
+<h3 id="构建blob对象的方式"><a href="#构建blob对象的方式" class="headerlink" title="构建blob对象的方式"></a>构建blob对象的方式</h3><h4 id="Blob构造函数"><a href="#Blob构造函数" class="headerlink" title="Blob构造函数"></a>Blob构造函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Blob(array [, options])</span><br></pre></td></tr></table></figure>
+<p>通过Blob构造函数可以创建blob对象，Blob构造函数接受两个参数。第一个参数是数组，成员是字符串或二进制对象，表示新生成的Blob实例对象的内容；第二个参数是可选的，是一个配置对象，目前只有一个属性type，它的值是一个字符串，表示数据的 MIME 类型，默认是空字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; hello: &apos;world&apos; &#125;;</span><br><span class="line">var blob = new Blob([ JSON.stringify(obj) ], &#123;type : &apos;application/json&apos;&#125;);</span><br></pre></td></tr></table></figure>
+<p>Blob具有两个实例属性size和type，分别返回数据的大小和类型。</p>
+<blockquote>
+<p>数据类型参见<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME类型</a></p>
+</blockquote>
+<ul>
+<li>slice方法<br>可以实现大文件的<a href="https://scarletsky.github.io/2015/01/27/javascript-upload-slice-file-using-blob/" target="_blank" rel="noopener">分片上传</a><blockquote>
+<p>slice() 方法接受三个参数，起始偏移量，结束偏移量，还有可选的 mime 类型。如果 mime 类型，没有设置，那么新的 Blob 对象的 mime 类型和父级一样</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="File对象"><a href="#File对象" class="headerlink" title="File对象"></a>File对象</h3><p>文件(File) 接口提供有关文件的信息，并允许网页中的 JavaScript 访问其内容</p>
+<p>File 对象是特殊类型的 Blob，且可以用在任意的 Blob 类型的 context 中</p>
+<p>all files are blobs(所有的flies对象都是blobs对象)</p>
+<p>not all blobs are files(不是所有的blobs对象都是file对象)</p>
+<h4 id="1-怎么拿到一个file对象？"><a href="#1-怎么拿到一个file对象？" class="headerlink" title="1. 怎么拿到一个file对象？"></a>1. 怎么拿到一个file对象？</h4><ul>
+<li><p>input 输入框</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; @change=&quot;getFile&quot;&gt;</span><br><span class="line"></span><br><span class="line">function getFile (e) &#123;</span><br><span class="line">  let file = e.target.files[0]</span><br><span class="line">  console.log(file)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>drag and drop 拖放</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">element.ondrop = (e) =&gt; &#123;</span><br><span class="line">  let file = e.dataTransfer.files[0]</span><br><span class="line">  console.log(file)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-file对象的属性"><a href="#2-file对象的属性" class="headerlink" title="2. file对象的属性"></a>2. file对象的属性</h4><ul>
+<li><code>file.name</code> 文件名</li>
+<li><code>file.size</code> 文件大小</li>
+<li><code>file.type</code> 文件类型</li>
+<li><code>file.lastModifiedDate</code> 文件最后修改时间</li>
+</ul>
+<h4 id="3-拿到file对象后如何处理"><a href="#3-拿到file对象后如何处理" class="headerlink" title="3. 拿到file对象后如何处理?"></a>3. 拿到file对象后如何处理?</h4><ul>
+<li>FileReader.readAsArrayBuffer()<blockquote>
+<p>开始读取指定的 Blob中的内容, 一旦完成, result 属性中保存的将是被读取文件的 ArrayBuffer 数据对象</p>
+</blockquote>
+</li>
+<li>FileReader.readAsDataURL()<blockquote>
+<p>开始读取指定的Blob中的内容。一旦完成，result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容。</p>
+</blockquote>
+</li>
+<li>FileReader.readAsText()<blockquote>
+<p>开始读取指定的Blob中的内容。一旦完成，result属性中将包含一个字符串以表示所读取的文件内容。</p>
+</blockquote>
+</li>
+<li>FileReader.abort()<blockquote>
+<p>中止读取操作。在返回时，readyState属性为DONE</p>
+</blockquote>
+</li>
+</ul>
+<p>例子: 用户上传文件后预览</p>
+<h3 id="Buffer对象"><a href="#Buffer对象" class="headerlink" title="Buffer对象"></a>Buffer对象</h3><p>Buffer对象是Node处理二进制数据的一个接口。它是Node原生提供的全局对象，可以直接使用，不需要require(‘buffer’)</p>
+<h3 id="ArrayBuffer-对象-amp-TypedArray视图-amp-Dataview视图"><a href="#ArrayBuffer-对象-amp-TypedArray视图-amp-Dataview视图" class="headerlink" title="ArrayBuffer 对象 &amp; TypedArray视图 &amp; Dataview视图"></a>ArrayBuffer 对象 &amp; TypedArray视图 &amp; Dataview视图</h3><p>简单来说，ArrayBuffer是装着二进制数据的对象， <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank" rel="noopener">ArrayBuffer</a>对象代表原始的二进制数据，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" target="_blank" rel="noopener">TypedArray</a> 视图用来读写简单类型的二进制数据，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/DataView" target="_blank" rel="noopener">DataView</a>视图用来读写复杂类型的二进制数据。<br>ArrayBuffer 不能直接操作，而是要通过TypedArray对象或 DataView 对象来操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 创建一个8字节的ArrayBuffer  </span><br><span class="line">var b = new ArrayBuffer(8);  </span><br><span class="line">  </span><br><span class="line">// 创建一个指向b的视图v1，采用Int32类型，开始于默认的字节索引0，直到缓冲区的末尾  </span><br><span class="line">var v1 = new Int32Array(b);  </span><br><span class="line">  </span><br><span class="line">// 创建一个指向b的视图v2，采用Uint8类型，开始于字节索引2，直到缓冲区的末尾  </span><br><span class="line">var v2 = new Uint8Array(b, 2);  </span><br><span class="line">  </span><br><span class="line">// 创建一个指向b的视图v3，采用Int16类型，开始于字节索引2，长度为2  </span><br><span class="line">var v3 = new Int16Array(b, 2, 2);</span><br></pre></td></tr></table></figure>
+<p>上面代码里变量的数据结构如下表所示：<br><img src="https://user-gold-cdn.xitu.io/2018/9/12/165cc5d7d759e61d?w=846&amp;h=470&amp;f=png&amp;s=33252" alt=""></p>
+<h3 id="URL对象"><a href="#URL对象" class="headerlink" title="URL对象"></a>URL对象</h3><p>调用 URL 对象的 createObjectURL 方法，传入一个 File 对象或者 Blob 对象，能生成一个链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var blob = new Blob([&apos;Hello World!&apos;])</span><br><span class="line">var a = document.createElement(&apos;a&apos;)</span><br><span class="line">a.href = window.URL.createObjectURL(blob)</span><br><span class="line">a.download = &apos;a.txt&apos;</span><br><span class="line">a.textContent = &apos;Download&apos;</span><br><span class="line"></span><br><span class="line">document.body.appendChild(a)</span><br></pre></td></tr></table></figure></p>
+<p>页面上生成了一个超链接，点击它就能下载一个名为 a.txt 的文件，里面的内容是 Hello World!</p>
+<h3 id="IndexedDB"><a href="#IndexedDB" class="headerlink" title="IndexedDB"></a>IndexedDB</h3><p>IndexedDB 就是浏览器提供的本地数据库，它可以被网页脚本创建和操作。IndexedDB 允许储存大量数据，提供查找接口，还能建立索引。</p>
+<h3 id="格式转换"><a href="#格式转换" class="headerlink" title="格式转换"></a>格式转换</h3><h4 id="1-filesystem-gt-blob-gt-file"><a href="#1-filesystem-gt-blob-gt-file" class="headerlink" title="1. filesystem =&gt; blob =&gt; file"></a>1. filesystem =&gt; blob =&gt; file</h4><p><code>blob</code>对象转<code>file</code>对象，<code>blob</code>可以看成存放二进制文件的容器，因此可以将系统中的文件读取后转化成<code>blob</code>,<code>blob</code>又可以转化成<code>file</code>对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function blobToFile(filePath) &#123;</span><br><span class="line">    fs.openSync(filePath, &apos;w&apos;)</span><br><span class="line">    </span><br><span class="line">    let buffer = fs.readFileSync(filePath)</span><br><span class="line">    </span><br><span class="line">    let blob = new Blob([buffer], &#123;type: &apos;application/octet-stream&apos;&#125;)</span><br><span class="line">    let file = new File([blob], filename)</span><br><span class="line"></span><br><span class="line">    return file  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-filesystem-gt-blob-gt-dom-URL"><a href="#2-filesystem-gt-blob-gt-dom-URL" class="headerlink" title="2. filesystem =&gt; blob =&gt; dom(URL)"></a>2. filesystem =&gt; blob =&gt; dom(URL)</h4><p>选择本地图片后预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; @change=&quot;display&quot;&gt;</span><br><span class="line"></span><br><span class="line">function display(e) &#123;</span><br><span class="line">  let img = document.createElement(&apos;img&apos;)</span><br><span class="line">  img.src = URL.createObjectURL(e.target.files[0])</span><br><span class="line">  img.onload = function () &#123;</span><br><span class="line">    URL.revokeObjectURL(this.src)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-filesystem-gt-blob-gt-web"><a href="#3-filesystem-gt-blob-gt-web" class="headerlink" title="3. filesystem =&gt; blob =&gt; web"></a>3. filesystem =&gt; blob =&gt; web</h4><p>上传blob &amp; 上传文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function uploadBlob (url, blob, callback) &#123;</span><br><span class="line">  let request = new XMLHttpRequest()</span><br><span class="line">  request.open(&apos;POST&apos;, url)</span><br><span class="line">  request.send(blob)</span><br><span class="line">  request.upload.onprogress = callback</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function uploadFiles (url, files) &#123;</span><br><span class="line">  let request = new XMLHttpRequest()</span><br><span class="line">  request.open(&apos;POST&apos;, url)</span><br><span class="line">  let formData = new FormData()</span><br><span class="line">  for (let i = 0; i &lt; files.length; i++) &#123;</span><br><span class="line">    formData.append(files[i].name, files[i]</span><br><span class="line">  &#125;</span><br><span class="line">  request.send(formData)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-web-gt-blob-gt-dom"><a href="#4-web-gt-blob-gt-dom" class="headerlink" title="4. web =&gt; blob =&gt; dom"></a>4. web =&gt; blob =&gt; dom</h4><p>从服务器下载一张图片并显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest()</span><br><span class="line">xhr.open(&apos;get&apos;, &apos;1.jpg&apos;, true)</span><br><span class="line">xhr.responseType = &apos;blob&apos;</span><br><span class="line">xhr.onload = function() &#123;</span><br><span class="line">  if (this.status == 200) &#123;</span><br><span class="line">    var blob = this.response</span><br><span class="line">    var img = document.createElement(&apos;img&apos;)</span><br><span class="line">    img.onload = function(e) &#123;</span><br><span class="line">      window.URL.revokeObjectURL(img.src)</span><br><span class="line">    &#125;</span><br><span class="line">    img.src = window.URL.createObjectURL(blob)</span><br><span class="line">    eleAppend.appendChild(img)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.send()</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-blob-lt-gt-indexedDB"><a href="#5-blob-lt-gt-indexedDB" class="headerlink" title="5. blob &lt;=&gt; indexedDB"></a>5. blob &lt;=&gt; indexedDB</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># blob =&gt; indexedDB</span><br><span class="line">store.put(blob)</span><br><span class="line"># get blob from indexedDB</span><br><span class="line">let request = blob = store.get(key)</span><br><span class="line">request.onsuccess = function () &#123;</span><br><span class="line">  let blob = request.result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-blob-lt-gt-worker"><a href="#6-blob-lt-gt-worker" class="headerlink" title="6. blob &lt;=&gt; worker"></a>6. blob &lt;=&gt; worker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker.postMessage(blob)</span><br><span class="line">worker.onmessage = function (e) &#123;</span><br><span class="line">  let blob = e.data</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/27/js中的神奇代码/" rel="next" title="js中的神奇代码">
+                <i class="fa fa-chevron-left"></i> js中的神奇代码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">linli</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/linliya" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#blob是什么？"><span class="nav-number">1.</span> <span class="nav-text">blob是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建blob对象的方式"><span class="nav-number">2.</span> <span class="nav-text">构建blob对象的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Blob构造函数"><span class="nav-number">2.1.</span> <span class="nav-text">Blob构造函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File对象"><span class="nav-number">3.</span> <span class="nav-text">File对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-怎么拿到一个file对象？"><span class="nav-number">3.1.</span> <span class="nav-text">1. 怎么拿到一个file对象？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-file对象的属性"><span class="nav-number">3.2.</span> <span class="nav-text">2. file对象的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-拿到file对象后如何处理"><span class="nav-number">3.3.</span> <span class="nav-text">3. 拿到file对象后如何处理?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer对象"><span class="nav-number">4.</span> <span class="nav-text">Buffer对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayBuffer-对象-amp-TypedArray视图-amp-Dataview视图"><span class="nav-number">5.</span> <span class="nav-text">ArrayBuffer 对象 &amp; TypedArray视图 &amp; Dataview视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URL对象"><span class="nav-number">6.</span> <span class="nav-text">URL对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IndexedDB"><span class="nav-number">7.</span> <span class="nav-text">IndexedDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式转换"><span class="nav-number">8.</span> <span class="nav-text">格式转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-filesystem-gt-blob-gt-file"><span class="nav-number">8.1.</span> <span class="nav-text">1. filesystem =&gt; blob =&gt; file</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-filesystem-gt-blob-gt-dom-URL"><span class="nav-number">8.2.</span> <span class="nav-text">2. filesystem =&gt; blob =&gt; dom(URL)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-filesystem-gt-blob-gt-web"><span class="nav-number">8.3.</span> <span class="nav-text">3. filesystem =&gt; blob =&gt; web</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-web-gt-blob-gt-dom"><span class="nav-number">8.4.</span> <span class="nav-text">4. web =&gt; blob =&gt; dom</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-blob-lt-gt-indexedDB"><span class="nav-number">8.5.</span> <span class="nav-text">5. blob &lt;=&gt; indexedDB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-blob-lt-gt-worker"><span class="nav-number">8.6.</span> <span class="nav-text">6. blob &lt;=&gt; worker</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">linli</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

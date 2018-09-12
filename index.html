@@ -229,6 +229,322 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/09/byte & blob/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="linli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林莉的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/09/byte & blob/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-09T21:07:55+08:00">
+                2018-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://user-gold-cdn.xitu.io/2018/9/11/165c9258d942a92f?w=1456&amp;h=998&amp;f=jpeg&amp;s=285954" alt=""></p>
+<h3 id="blob是什么？"><a href="#blob是什么？" class="headerlink" title="blob是什么？"></a>blob是什么？</h3><p>blob, 即binary large object，二进制大对象，MDN上的定义是:</p>
+<blockquote>
+<p>Blob 对象表示一个不可变、原始数据的类文件对象。Blob 表示的不一定是JavaScript原生格式的数据。File 接口基于Blob，继承了 blob 的功能并将其扩展使其支持用户系统上的文件</p>
+</blockquote>
+<p>Blob 对象表示一个二进制文件的数据内容,可以看做是存放二进制数据的容器，一直以来，JS都没有比较好的可以直接处理二进制的方法。而Blob的出现，使我们可以通过JS直接操作二进制数据</p>
+<blockquote>
+<p>拓展: MySql/Oracle数据库中，有一种Blob类型，专门存放二进制数据</p>
+</blockquote>
+<h3 id="构建blob对象的方式"><a href="#构建blob对象的方式" class="headerlink" title="构建blob对象的方式"></a>构建blob对象的方式</h3><h4 id="Blob构造函数"><a href="#Blob构造函数" class="headerlink" title="Blob构造函数"></a>Blob构造函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Blob(array [, options])</span><br></pre></td></tr></table></figure>
+<p>通过Blob构造函数可以创建blob对象，Blob构造函数接受两个参数。第一个参数是数组，成员是字符串或二进制对象，表示新生成的Blob实例对象的内容；第二个参数是可选的，是一个配置对象，目前只有一个属性type，它的值是一个字符串，表示数据的 MIME 类型，默认是空字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; hello: &apos;world&apos; &#125;;</span><br><span class="line">var blob = new Blob([ JSON.stringify(obj) ], &#123;type : &apos;application/json&apos;&#125;);</span><br></pre></td></tr></table></figure>
+<p>Blob具有两个实例属性size和type，分别返回数据的大小和类型。</p>
+<blockquote>
+<p>数据类型参见<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME类型</a></p>
+</blockquote>
+<ul>
+<li>slice方法<br>可以实现大文件的<a href="https://scarletsky.github.io/2015/01/27/javascript-upload-slice-file-using-blob/" target="_blank" rel="noopener">分片上传</a><blockquote>
+<p>slice() 方法接受三个参数，起始偏移量，结束偏移量，还有可选的 mime 类型。如果 mime 类型，没有设置，那么新的 Blob 对象的 mime 类型和父级一样</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="File对象"><a href="#File对象" class="headerlink" title="File对象"></a>File对象</h3><p>文件(File) 接口提供有关文件的信息，并允许网页中的 JavaScript 访问其内容</p>
+<p>File 对象是特殊类型的 Blob，且可以用在任意的 Blob 类型的 context 中</p>
+<p>all files are blobs(所有的flies对象都是blobs对象)</p>
+<p>not all blobs are files(不是所有的blobs对象都是file对象)</p>
+<h4 id="1-怎么拿到一个file对象？"><a href="#1-怎么拿到一个file对象？" class="headerlink" title="1. 怎么拿到一个file对象？"></a>1. 怎么拿到一个file对象？</h4><ul>
+<li><p>input 输入框</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; @change=&quot;getFile&quot;&gt;</span><br><span class="line"></span><br><span class="line">function getFile (e) &#123;</span><br><span class="line">  let file = e.target.files[0]</span><br><span class="line">  console.log(file)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>drag and drop 拖放</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">element.ondrop = (e) =&gt; &#123;</span><br><span class="line">  let file = e.dataTransfer.files[0]</span><br><span class="line">  console.log(file)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-file对象的属性"><a href="#2-file对象的属性" class="headerlink" title="2. file对象的属性"></a>2. file对象的属性</h4><ul>
+<li><code>file.name</code> 文件名</li>
+<li><code>file.size</code> 文件大小</li>
+<li><code>file.type</code> 文件类型</li>
+<li><code>file.lastModifiedDate</code> 文件最后修改时间</li>
+</ul>
+<h4 id="3-拿到file对象后如何处理"><a href="#3-拿到file对象后如何处理" class="headerlink" title="3. 拿到file对象后如何处理?"></a>3. 拿到file对象后如何处理?</h4><ul>
+<li>FileReader.readAsArrayBuffer()<blockquote>
+<p>开始读取指定的 Blob中的内容, 一旦完成, result 属性中保存的将是被读取文件的 ArrayBuffer 数据对象</p>
+</blockquote>
+</li>
+<li>FileReader.readAsDataURL()<blockquote>
+<p>开始读取指定的Blob中的内容。一旦完成，result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容。</p>
+</blockquote>
+</li>
+<li>FileReader.readAsText()<blockquote>
+<p>开始读取指定的Blob中的内容。一旦完成，result属性中将包含一个字符串以表示所读取的文件内容。</p>
+</blockquote>
+</li>
+<li>FileReader.abort()<blockquote>
+<p>中止读取操作。在返回时，readyState属性为DONE</p>
+</blockquote>
+</li>
+</ul>
+<p>例子: 用户上传文件后预览</p>
+<h3 id="Buffer对象"><a href="#Buffer对象" class="headerlink" title="Buffer对象"></a>Buffer对象</h3><p>Buffer对象是Node处理二进制数据的一个接口。它是Node原生提供的全局对象，可以直接使用，不需要require(‘buffer’)</p>
+<h3 id="ArrayBuffer-对象-amp-TypedArray视图-amp-Dataview视图"><a href="#ArrayBuffer-对象-amp-TypedArray视图-amp-Dataview视图" class="headerlink" title="ArrayBuffer 对象 &amp; TypedArray视图 &amp; Dataview视图"></a>ArrayBuffer 对象 &amp; TypedArray视图 &amp; Dataview视图</h3><p>简单来说，ArrayBuffer是装着二进制数据的对象， <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank" rel="noopener">ArrayBuffer</a>对象代表原始的二进制数据，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/TypedArray" target="_blank" rel="noopener">TypedArray</a> 视图用来读写简单类型的二进制数据，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/DataView" target="_blank" rel="noopener">DataView</a>视图用来读写复杂类型的二进制数据。<br>ArrayBuffer 不能直接操作，而是要通过TypedArray对象或 DataView 对象来操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 创建一个8字节的ArrayBuffer  </span><br><span class="line">var b = new ArrayBuffer(8);  </span><br><span class="line">  </span><br><span class="line">// 创建一个指向b的视图v1，采用Int32类型，开始于默认的字节索引0，直到缓冲区的末尾  </span><br><span class="line">var v1 = new Int32Array(b);  </span><br><span class="line">  </span><br><span class="line">// 创建一个指向b的视图v2，采用Uint8类型，开始于字节索引2，直到缓冲区的末尾  </span><br><span class="line">var v2 = new Uint8Array(b, 2);  </span><br><span class="line">  </span><br><span class="line">// 创建一个指向b的视图v3，采用Int16类型，开始于字节索引2，长度为2  </span><br><span class="line">var v3 = new Int16Array(b, 2, 2);</span><br></pre></td></tr></table></figure>
+<p>上面代码里变量的数据结构如下表所示：<br><img src="https://user-gold-cdn.xitu.io/2018/9/12/165cc5d7d759e61d?w=846&amp;h=470&amp;f=png&amp;s=33252" alt=""></p>
+<h3 id="URL对象"><a href="#URL对象" class="headerlink" title="URL对象"></a>URL对象</h3><p>调用 URL 对象的 createObjectURL 方法，传入一个 File 对象或者 Blob 对象，能生成一个链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var blob = new Blob([&apos;Hello World!&apos;])</span><br><span class="line">var a = document.createElement(&apos;a&apos;)</span><br><span class="line">a.href = window.URL.createObjectURL(blob)</span><br><span class="line">a.download = &apos;a.txt&apos;</span><br><span class="line">a.textContent = &apos;Download&apos;</span><br><span class="line"></span><br><span class="line">document.body.appendChild(a)</span><br></pre></td></tr></table></figure></p>
+<p>页面上生成了一个超链接，点击它就能下载一个名为 a.txt 的文件，里面的内容是 Hello World!</p>
+<h3 id="IndexedDB"><a href="#IndexedDB" class="headerlink" title="IndexedDB"></a>IndexedDB</h3><p>IndexedDB 就是浏览器提供的本地数据库，它可以被网页脚本创建和操作。IndexedDB 允许储存大量数据，提供查找接口，还能建立索引。</p>
+<h3 id="格式转换"><a href="#格式转换" class="headerlink" title="格式转换"></a>格式转换</h3><h4 id="1-filesystem-gt-blob-gt-file"><a href="#1-filesystem-gt-blob-gt-file" class="headerlink" title="1. filesystem =&gt; blob =&gt; file"></a>1. filesystem =&gt; blob =&gt; file</h4><p><code>blob</code>对象转<code>file</code>对象，<code>blob</code>可以看成存放二进制文件的容器，因此可以将系统中的文件读取后转化成<code>blob</code>,<code>blob</code>又可以转化成<code>file</code>对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function blobToFile(filePath) &#123;</span><br><span class="line">    fs.openSync(filePath, &apos;w&apos;)</span><br><span class="line">    </span><br><span class="line">    let buffer = fs.readFileSync(filePath)</span><br><span class="line">    </span><br><span class="line">    let blob = new Blob([buffer], &#123;type: &apos;application/octet-stream&apos;&#125;)</span><br><span class="line">    let file = new File([blob], filename)</span><br><span class="line"></span><br><span class="line">    return file  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-filesystem-gt-blob-gt-dom-URL"><a href="#2-filesystem-gt-blob-gt-dom-URL" class="headerlink" title="2. filesystem =&gt; blob =&gt; dom(URL)"></a>2. filesystem =&gt; blob =&gt; dom(URL)</h4><p>选择本地图片后预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; @change=&quot;display&quot;&gt;</span><br><span class="line"></span><br><span class="line">function display(e) &#123;</span><br><span class="line">  let img = document.createElement(&apos;img&apos;)</span><br><span class="line">  img.src = URL.createObjectURL(e.target.files[0])</span><br><span class="line">  img.onload = function () &#123;</span><br><span class="line">    URL.revokeObjectURL(this.src)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-filesystem-gt-blob-gt-web"><a href="#3-filesystem-gt-blob-gt-web" class="headerlink" title="3. filesystem =&gt; blob =&gt; web"></a>3. filesystem =&gt; blob =&gt; web</h4><p>上传blob &amp; 上传文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function uploadBlob (url, blob, callback) &#123;</span><br><span class="line">  let request = new XMLHttpRequest()</span><br><span class="line">  request.open(&apos;POST&apos;, url)</span><br><span class="line">  request.send(blob)</span><br><span class="line">  request.upload.onprogress = callback</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function uploadFiles (url, files) &#123;</span><br><span class="line">  let request = new XMLHttpRequest()</span><br><span class="line">  request.open(&apos;POST&apos;, url)</span><br><span class="line">  let formData = new FormData()</span><br><span class="line">  for (let i = 0; i &lt; files.length; i++) &#123;</span><br><span class="line">    formData.append(files[i].name, files[i]</span><br><span class="line">  &#125;</span><br><span class="line">  request.send(formData)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-web-gt-blob-gt-dom"><a href="#4-web-gt-blob-gt-dom" class="headerlink" title="4. web =&gt; blob =&gt; dom"></a>4. web =&gt; blob =&gt; dom</h4><p>从服务器下载一张图片并显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest()</span><br><span class="line">xhr.open(&apos;get&apos;, &apos;1.jpg&apos;, true)</span><br><span class="line">xhr.responseType = &apos;blob&apos;</span><br><span class="line">xhr.onload = function() &#123;</span><br><span class="line">  if (this.status == 200) &#123;</span><br><span class="line">    var blob = this.response</span><br><span class="line">    var img = document.createElement(&apos;img&apos;)</span><br><span class="line">    img.onload = function(e) &#123;</span><br><span class="line">      window.URL.revokeObjectURL(img.src)</span><br><span class="line">    &#125;</span><br><span class="line">    img.src = window.URL.createObjectURL(blob)</span><br><span class="line">    eleAppend.appendChild(img)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.send()</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-blob-lt-gt-indexedDB"><a href="#5-blob-lt-gt-indexedDB" class="headerlink" title="5. blob &lt;=&gt; indexedDB"></a>5. blob &lt;=&gt; indexedDB</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># blob =&gt; indexedDB</span><br><span class="line">store.put(blob)</span><br><span class="line"># get blob from indexedDB</span><br><span class="line">let request = blob = store.get(key)</span><br><span class="line">request.onsuccess = function () &#123;</span><br><span class="line">  let blob = request.result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-blob-lt-gt-worker"><a href="#6-blob-lt-gt-worker" class="headerlink" title="6. blob &lt;=&gt; worker"></a>6. blob &lt;=&gt; worker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker.postMessage(blob)</span><br><span class="line">worker.onmessage = function (e) &#123;</span><br><span class="line">  let blob = e.data</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/js中的神奇代码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="linli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林莉的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/27/js中的神奇代码/" itemprop="url">js中的神奇代码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T14:47:37+08:00">
+                2018-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>js中，有一些解决方案很值得斟酌，有时候简单的几行代码，能解决很复杂的问题，我在这里做一下记录，就当作是一个工具包吧</p>
+<h4 id="请用代码实现test-2-3-4-5-120这个函数"><a href="#请用代码实现test-2-3-4-5-120这个函数" class="headerlink" title="请用代码实现test(2)(3)(4)(5) = 120这个函数"></a>请用代码实现test(2)(3)(4)(5) = 120这个函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function test(x)&#123;</span><br><span class="line">  var sum = x;</span><br><span class="line">  var mod = function(y) &#123;</span><br><span class="line">    sum = sum * y;</span><br><span class="line">    return mod;</span><br><span class="line">  &#125;;</span><br><span class="line">  mod.toString =function()&#123;</span><br><span class="line">    return sum;</span><br><span class="line">  &#125;;</span><br><span class="line">  return mod;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="格式化日期，包含-年-月-日"><a href="#格式化日期，包含-年-月-日" class="headerlink" title="格式化日期，包含 年-月-日"></a>格式化日期，包含 <code>年-月-日</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> # @param &#123;Date|String&#125; date 时间戳</span><br><span class="line"> # @returns &#123;String&#125; 按照`-`分割开的日期显示字符串</span><br><span class="line"></span><br><span class="line">const formatDate = date =&gt; &#123;</span><br><span class="line">  let dateFormat = new Date(date)</span><br><span class="line">  if (!dateFormat) return &apos;&apos;</span><br><span class="line">  const year = dateFormat.getFullYear()</span><br><span class="line">  const month = dateFormat.getMonth() + 1</span><br><span class="line">  const day = dateFormat.getDate()</span><br><span class="line"></span><br><span class="line">  return [year, month, day].map(formatNumber).join(&apos;-&apos;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const formatNumber = n =&gt; &#123;</span><br><span class="line">  n = n.toString()</span><br><span class="line">  return n[1] ? n : &apos;0&apos; + n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="格式化时间，包含-年-月-日-时-分-秒"><a href="#格式化时间，包含-年-月-日-时-分-秒" class="headerlink" title="格式化时间，包含 年-月-日 时-分-秒"></a>格式化时间，包含 <code>年-月-日 时-分-秒</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> # @param &#123;Date|String&#125; date 时间戳</span><br><span class="line"> # @returns &#123;String&#125; 按照`-`分割开的时间显示字符串</span><br><span class="line"> </span><br><span class="line">const formatTime = date =&gt; &#123;</span><br><span class="line">  if (!date) return &apos;&apos;</span><br><span class="line">  let dateFormat = new Date(date)</span><br><span class="line">  if (!dateFormat) return &apos;&apos;</span><br><span class="line">  const year = dateFormat.getFullYear()</span><br><span class="line">  const month = dateFormat.getMonth() + 1</span><br><span class="line">  const day = dateFormat.getDate()</span><br><span class="line">  const hour = dateFormat.getHours()</span><br><span class="line">  const minute = dateFormat.getMinutes()</span><br><span class="line">  const second = dateFormat.getSeconds()</span><br><span class="line"></span><br><span class="line">  return [year, month, day].map(formatNumber).join(&apos;-&apos;) + &apos; &apos; + [hour, minute, second].map(formatNumber).join(&apos;:&apos;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="格式化文件大小显示"><a href="#格式化文件大小显示" class="headerlink" title="格式化文件大小显示"></a>格式化文件大小显示</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> # @param &#123;Number&#125; size 大小</span><br><span class="line"> # @returns &#123;String&#125; 格式化后的容量大小</span><br><span class="line"></span><br><span class="line">const formatSize = size =&gt; &#123;</span><br><span class="line">  if (typeof size !== &apos;number&apos; || size &lt; 0) &#123;</span><br><span class="line">    return &apos;0 B&apos;</span><br><span class="line">  &#125;</span><br><span class="line">  if (size &lt; 1024) return `$&#123;size&#125; B`</span><br><span class="line">  size = size % 1024 === 0 ? size / 1024 : (size / 1024).toFixed(2)</span><br><span class="line">  if (size &lt; 1024) return `$&#123;size&#125; KB`</span><br><span class="line">  size = size % 1024 === 0 ? size / 1024 : (size / 1024).toFixed(2)</span><br><span class="line">  if (size &lt; 1024) return `$&#123;size&#125; MB`</span><br><span class="line">  size = size % 1024 === 0 ? size / 1024 : (size / 1024).toFixed(2)</span><br><span class="line">  if (size &lt; 1024) return `$&#123;size&#125; GB`</span><br><span class="line">  size = size % 1024 === 0 ? size / 1024 : (size / 1024).toFixed(2)</span><br><span class="line">  if (size &lt; 1024) return `$&#123;size&#125; TB`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/10/项目难点笔记本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1430,345 +1746,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/nuxt入门/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="linli">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="林莉的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/26/nuxt入门/" itemprop="url">nuxt入门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T16:18:23+08:00">
-                2018-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>有关于nuxt的详细介绍，<a href="https://zh.nuxtjs.org/guide" target="_blank" rel="noopener">官方文档</a>已经写得很好了，我这里也不再赘述，我还是写一下比较难理解的配置项吧:</p>
-<h4 id="asyncData"><a href="#asyncData" class="headerlink" title="asyncData"></a>asyncData</h4><p>在这个方法被调用的时候，第一个参数被设定为当前页面的上下文对象<a href="https://zh.nuxtjs.org/api/" target="_blank" rel="noopener">context</a>(context可以理解为nuxt提供的全局对象)，可以利用 asyncData方法来获取数据并返回给当前组件(返回值即this.data)</p>
-<blockquote>
-<p>由于asyncData方法是在组件 <strong>初始化</strong> 前被调用的，所以在方法内是没有办法通过 this 来引用组件的实例对象。</p>
-</blockquote>
-<p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">asyncData (&#123;params&#125;) &#123;</span><br><span class="line">  return &#123; params: params &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="配置里的build相关配置解析"><a href="#配置里的build相关配置解析" class="headerlink" title="配置里的build相关配置解析"></a>配置里的build相关配置解析</h4><h5 id="analyze"><a href="#analyze" class="headerlink" title="analyze"></a>analyze</h5><p>如果将<code>analyze</code>设置为<code>true</code>的话，需要在<code>package.json</code>里面的script加上<code>build: nuxt build -analyze</code>，那么运行<code>npm run build</code>的时候在<code>http://localhost:8888</code>可以查看整个项目打包后的文件大小等信息，方便我们进行性能优化</p>
-<h5 id="extend"><a href="#extend" class="headerlink" title="extend"></a>extend</h5><p><code>nuxt</code>集成了<code>webpack</code>, 它允许我们对<code>webpack</code>的配置进行拓展，通过push方法将配置增加到<code>webpack</code>的配置项中，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">extend (config, &#123; isDev, isClient &#125;) &#123;</span><br><span class="line">  if (isDev &amp;&amp; isClient) &#123;</span><br><span class="line">    config.module.rules.push(&#123;</span><br><span class="line">      enforce: &apos;pre&apos;,</span><br><span class="line">      test: /\.(js|vue)$/,</span><br><span class="line">      loader: &apos;eslint-loader&apos;,</span><br><span class="line">      exclude: /(node_modules)/</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
-<h5 id="postcss"><a href="#postcss" class="headerlink" title="postcss"></a>postcss</h5><p><code>nuxt</code>默认为我们添加了<code>autoprefixer</code>，即项目打包完后为一些属性自动添加浏览器前缀<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  require(&apos;autoprefixer&apos;)(&#123;</span><br><span class="line">    browsers: [&apos;last 3 versions&apos;]</span><br><span class="line">  &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<h5 id="vendor"><a href="#vendor" class="headerlink" title="vendor"></a>vendor</h5><p>这个感觉挺有用的，在vendor数组里面添加的模块会被打包到vendor bundle里，之后在组件内对该模块的引用将不会被打包到组件对应的文件内了，这样说感觉有点抽象，举个例子说明一下：</p>
-<blockquote>
-<p>我们在<code>build.vendor</code>里面添加了<code>axios</code>模块:<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  build: &#123;</span><br><span class="line">    vendor: [&apos;axios&apos;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>然后在a.vue里面和b.vue里面都进行了以下操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import axios from &apos;axios&apos;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>那么a.vue和b.vue打包后的文件大小将比不加上build.vendor小，如果很多文件都需要引入axios的话，那么对于文件大小的优化效果是比较明显的</p>
-</blockquote>
-<p>暂时就写这几点…其它的可以查看nuxt的文档，可能会继续更新…</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/响应式网站设计/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="linli">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="林莉的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/26/响应式网站设计/" itemprop="url">响应式网站设计</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T16:16:26+08:00">
-                2018-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p> 随着设备种类的增多，网站设计是否能响应式地根据页面大小进行适配变得越来越重要。下面是在进行响应式设计过程中需要注意的几个点：</p>
-</blockquote>
-<h4 id="设置viewport"><a href="#设置viewport" class="headerlink" title="设置viewport"></a>设置viewport</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="图片溢出问题"><a href="#图片溢出问题" class="headerlink" title="图片溢出问题"></a>图片溢出问题</h4><p>假设设备的宽度为1000px, 而图片的大小为1200px, 那么势必会产生横向滚动条，这是很不友好的，解决方案是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 为元素添加max-width=100%</span><br><span class="line">img, embed, object, video &#123;</span><br><span class="line">  max-width: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="从小屏幕设备适应到大屏幕设备"><a href="#从小屏幕设备适应到大屏幕设备" class="headerlink" title="从小屏幕设备适应到大屏幕设备"></a>从小屏幕设备适应到大屏幕设备</h4><p> 一开始就从小屏幕设备适配起，有以下好处:</p>
-<ul>
-<li>将关键信息放在用户容易看见的地方，从小屏幕做起</li>
-<li>可以知道主要风格和布局是否能兼容任何设备</li>
-<li>小屏幕设备对性能要求很高，因此可以从一开始就关注性能问题</li>
-</ul>
-<h4 id="确保点击的区域够大"><a href="#确保点击的区域够大" class="headerlink" title="确保点击的区域够大"></a>确保点击的区域够大</h4><p>用户在手机等设备上操作时，如果按钮大小太小，且按钮之间的间距也很小的话，容易产生误操作，因此要确保点击的区域至少在40px左右，如加上：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">padding: 1.5em;</span><br></pre></td></tr></table></figure></p>
-<h4 id="合理使用min-width和max-width"><a href="#合理使用min-width和max-width" class="headerlink" title="合理使用min-width和max-width"></a>合理使用min-width和max-width</h4><p>min-width和max-width在媒体查询中的作用巨大</p>
-<h4 id="根据网站内容合理选择断点"><a href="#根据网站内容合理选择断点" class="headerlink" title="根据网站内容合理选择断点"></a>根据网站内容合理选择断点</h4><p>即各个设备尺寸使用不同的布局方式</p>
-<h4 id="使用弹性布局flex"><a href="#使用弹性布局flex" class="headerlink" title="使用弹性布局flex"></a>使用弹性布局flex</h4><p>在响应式设计中，常用的flex属性为<code>flex-wrap</code>和<code>order</code></p>
-<h4 id="常见的响应式布局"><a href="#常见的响应式布局" class="headerlink" title="常见的响应式布局"></a>常见的响应式布局</h4><ol>
-<li>column drop(掉落列模型)</li>
-</ol>
-<p> <img src="https://upload-images.jianshu.io/upload_images/11543643-840125911de014c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="column drop模型.png"></p>
-<ul>
-<li><p>小屏幕设备布局核心代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-wrap: wrap;</span><br><span class="line">&#125;</span><br><span class="line">.box &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>中屏幕设备布局核心代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 600px) &#123;</span><br><span class="line">  .dark &#123;</span><br><span class="line">     width: 25%;</span><br><span class="line">  &#125;</span><br><span class="line">  . blue &#123;</span><br><span class="line">    width: 75%;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>大屏幕设备布局核心代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 601px) &#123;</span><br><span class="line">  .dark, .green &#123;</span><br><span class="line">     width: 20%;</span><br><span class="line">  &#125;</span><br><span class="line">  . blue &#123;</span><br><span class="line">    width: 60%;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol start="2">
-<li>mostly fluid (大体流动模型)<br>mostly fluid 跟 column drop 很类似，只是在column drop的基础上，在最大尺寸时两边增加margin<br><img src="https://upload-images.jianshu.io/upload_images/11543643-a66f7dbf42b3216b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mostly fluid模型.png"></li>
-</ol>
-<ul>
-<li>大屏幕时的核心代码如下:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  width: 700px;</span><br><span class="line">  margin-left: auto;</span><br><span class="line">  margin-right: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol start="3">
-<li>layout shifter(布局切换器)<br>layout shifter跟column drop也很类似，不同于column drop, layout shifter增加了order来调整div的顺序<br><img src="https://upload-images.jianshu.io/upload_images/11543643-23cf884272df7ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="layout shifter模型.png"></li>
-</ol>
-<ul>
-<li>大屏幕时的核心代码如下:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@media sceen and (min-width: 600px) &#123;</span><br><span class="line">  .dark &#123;</span><br><span class="line">    width: 25%;</span><br><span class="line">    order: 1;</span><br><span class="line">  &#125;</span><br><span class="line">  .container 2 &#123;</span><br><span class="line">    width: 50%;</span><br><span class="line">  &#125;</span><br><span class="line">  .red &#123;</span><br><span class="line">     width: 25%;</span><br><span class="line">     order: -1;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol start="4">
-<li>off canvas (画布之外模型)<br>off canvas模型较为常见，先在小屏幕中隐藏导航栏等使用频率不高的组件，然后通过点击某个图标才显示导航栏<br><img src="https://upload-images.jianshu.io/upload_images/11543643-38821b968c6d4143.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="off canvas模型.png"></li>
-</ol>
-<ul>
-<li><p>小屏幕中的核心实现代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.nav &#123;</span><br><span class="line">  width: 300px;</span><br><span class="line">  height: 100%;</span><br><span class="line">  position: absolute;</span><br><span class="line">  transform: translate(-300px, 0);</span><br><span class="line">  transition: transform 0.3s ease;</span><br><span class="line">&#125;</span><br><span class="line">.nav.open &#123;</span><br><span class="line">  transform: translate(0, 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>屏幕变大时显示nav的操作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@media screen and (min-width: 600px) &#123;</span><br><span class="line">  .nav &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    transform: translate(0, 0);</span><br><span class="line">  &#125;</span><br><span class="line">  body &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-flow: row nowrap;</span><br><span class="line">  &#125;</span><br><span class="line">  .main &#123;</span><br><span class="line">    width: auto;</span><br><span class="line">    flex-grow: 1;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>切换的js代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">menu.addEventListener(&apos;click&apos;, function(e) &#123;</span><br><span class="line">  drawer.classList.toggle(&apos;open&apos;);</span><br><span class="line">  e.stopPropagation();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="响应式表格"><a href="#响应式表格" class="headerlink" title="响应式表格"></a>响应式表格</h4><p>虽然表格布局已经几乎被我们摒弃掉了，但是还是有一些需求需要用到表格来展示数据，比如篮球比赛的分数等，那么响应式表格要怎么实现呢？</p>
-<ol>
-<li>隐藏某些不重要的列，也就是设置为<code>display: none</code>(so easy, right?)</li>
-<li>将纵向排列转为横向排列<br>举个例子：<br><img src="https://upload-images.jianshu.io/upload_images/11543643-6c1acecb4374b6c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="纵向排列表格.png"></li>
-</ol>
-<p><img src="https://upload-images.jianshu.io/upload_images/11543643-05b46df25e70d2d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="横向排列表格.png"><br>实现的核心代码如下：</p>
-<ul>
-<li><p>html结构：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">      &lt;thead&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;th&gt;Team&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;1st&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;2nd&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;3rd&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;4th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;5th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;6th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;7th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;8th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;9th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;Final&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">      &lt;/thead&gt;</span><br><span class="line">      &lt;tbody&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td data-th=&quot;Team&quot;&gt;Toronto&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;1st&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;2nd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;3rd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;4th&quot;&gt;4&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;5th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;6th&quot;&gt;1&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;7th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;8th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;9th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;Final&quot;&gt;5&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td data-th=&quot;Team&quot;&gt;San Francisco&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;1st&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;2nd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;3rd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;4th&quot;&gt;4&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;5th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;6th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;7th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;8th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;9th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;Final&quot;&gt;4&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">      &lt;/tbody&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>css代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">table &#123;</span><br><span class="line">       border: 1px solid #ddd;</span><br><span class="line">     &#125;</span><br><span class="line">     tr:nth-child(odd) &#123;</span><br><span class="line">       background-color: #f9f9f9;</span><br><span class="line">     &#125;</span><br><span class="line">     @media screen and (max-width: 500px) &#123;</span><br><span class="line">       # 在一行显示</span><br><span class="line">       table, thead, tbody, th, td, tr &#123;</span><br><span class="line">         display: block;</span><br><span class="line">       &#125;</span><br><span class="line">       # 隐藏纵向表格的table header</span><br><span class="line">       thead tr &#123;</span><br><span class="line">         position: absolute;</span><br><span class="line">         top: -9999px;</span><br><span class="line">         left: -9999px;</span><br><span class="line">       &#125;</span><br><span class="line">       # 给横向表格的table header腾空间</span><br><span class="line">       td &#123; </span><br><span class="line">         position: relative;</span><br><span class="line">         padding-left: 50%; </span><br><span class="line">       &#125;</span><br><span class="line">       # 通过content添加横向表格的内容</span><br><span class="line">       td:before &#123; </span><br><span class="line">         position: absolute;</span><br><span class="line">         left: 6px;</span><br><span class="line">         content: attr(data-th);</span><br><span class="line">         font-weight: bold;</span><br><span class="line">       &#125;</span><br><span class="line">       td:first-of-type &#123;</span><br><span class="line">         font-weight: bold;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol start="3">
-<li>滚动表格<br>将表格放在一个div中，并设置div为<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">width: 100%;</span><br><span class="line">overflow-x: auto;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h4><p>每行显示45～90个字体字符，常见为65个字符</p>
-<h4 id="增加次要断点"><a href="#增加次要断点" class="headerlink" title="增加次要断点"></a>增加次要断点</h4><p>通过次要断点，对字体大小，图标大小等进行优化，达到更好的显示效果</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1812,7 +1796,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
