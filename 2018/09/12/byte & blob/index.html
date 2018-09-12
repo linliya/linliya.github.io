@@ -88,7 +88,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/9/11/165c9258d942a92f?w=1456&h=998&f=jpeg&s=285954">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/9/12/165cc5d7d759e61d?w=846&h=470&f=png&s=33252">
-<meta property="og:updated_time" content="2018-09-12T06:57:21.386Z">
+<meta property="og:updated_time" content="2018-09-12T08:18:20.187Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bytes &amp; blob">
 <meta name="twitter:description" content="blob是什么？blob, 即binary large object，二进制大对象，MDN上的定义是:  Blob 对象表示一个不可变、原始数据的类文件对象。Blob 表示的不一定是JavaScript原生格式的数据。File 接口基于Blob，继承了 blob 的功能并将其扩展使其支持用户系统上的文件  Blob 对象表示一个二进制文件的数据内容,可以看做是存放二进制数据的容器，一直以来，JS">
@@ -343,15 +343,15 @@
 <li><code>file.lastModifiedDate</code> 文件最后修改时间</li>
 </ul>
 <h4 id="3-拿到file对象后如何处理"><a href="#3-拿到file对象后如何处理" class="headerlink" title="3. 拿到file对象后如何处理?"></a>3. 拿到file对象后如何处理?</h4><ul>
-<li>FileReader.readAsArrayBuffer()<blockquote>
+<li>FileReader.readAsArrayBuffer(Blob|File)<blockquote>
 <p>开始读取指定的 Blob中的内容, 一旦完成, result 属性中保存的将是被读取文件的 ArrayBuffer 数据对象</p>
 </blockquote>
 </li>
-<li>FileReader.readAsDataURL()<blockquote>
+<li>FileReader.readAsDataURL(Blob|File)<blockquote>
 <p>开始读取指定的Blob中的内容。一旦完成，result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容。</p>
 </blockquote>
 </li>
-<li>FileReader.readAsText()<blockquote>
+<li>FileReader.readAsText(Blob|File)<blockquote>
 <p>开始读取指定的Blob中的内容。一旦完成，result属性中将包含一个字符串以表示所读取的文件内容。</p>
 </blockquote>
 </li>
