@@ -229,6 +229,182 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/05/读书笔记-css揭秘1之背景与边框/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="linli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林莉的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/05/读书笔记-css揭秘1之背景与边框/" itemprop="url">读书笔记-css揭秘1之背景与边框</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-05T17:56:59+08:00">
+                2018-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-半透明边框失效问题"><a href="#1-半透明边框失效问题" class="headerlink" title="1. 半透明边框失效问题"></a>1. 半透明边框失效问题</h3><p>想通过以下代码实现白色背景外面的半透明白色背景，但好像并没有起作用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">border: 10px solid hsla(0, 0%, 100%);</span><br><span class="line">background: white;</span><br></pre></td></tr></table></figure>
+<p>原因是: 默认情况下，背景会延伸到边框所在的区域下层，意思是背景是以元素的border-box外边缘包含的内容渲染的，如下图所示，border-edge以内的内容都是背景，因此我们设置的半透明边框也就被白色背景所覆盖了<br><img src="https://user-gold-cdn.xitu.io/2018/10/4/1663f7a15f506809?w=458&amp;h=278&amp;f=png&amp;s=19221" alt=""></p>
+<ul>
+<li><p>解决方案<br>通过背景裁剪属性(background-clip)设定背景从padding-box的外边缘开始渲染，这时我们想要实现的效果就出来了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">border: 10px solid hsla(0, 0%, 100%);</span><br><span class="line">background: white;</span><br><span class="line">background-clip: padding-box;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果图<br><img src="https://user-gold-cdn.xitu.io/2018/10/4/1663f7d7817cd168?w=1090&amp;h=414&amp;f=png&amp;s=519509" alt=""></p>
+</li>
+</ul>
+<h3 id="2-多重边框需要添加多余标签？"><a href="#2-多重边框需要添加多余标签？" class="headerlink" title="2. 多重边框需要添加多余标签？"></a>2. 多重边框需要添加多余标签？</h3><p>如果要我们实现多重边框，现在能想到的是不是使用多个元素来模拟？但是这样子的话就多了冗余标签了，其实，还有一个属性可以帮助我们实现这个功能, 那就是<code>box-shadow</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">background: yellowgreen;</span><br><span class="line">box-shadow: 0 0 0 10px #655,</span><br><span class="line">            0 0 0 15px deeppink</span><br><span class="line">            0 2px 5px 15px rgba(0, 0, 0, .6)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>效果图<br><img src="https://user-gold-cdn.xitu.io/2018/10/5/16642fb4fd326a8b?w=318&amp;h=218&amp;f=png&amp;s=3392" alt=""></li>
+</ul>
+<p>唯一需要注意的是，box-shadow是层层叠加的，第一层投影位于最里层，依次类推，因此需要按照此规律调整扩张半径，比如说，在第一层边框的基础上，我们想在外圈再加一道5px的边框，那就需要指定扩张半径为15px(10px+5px)，还可以在这些边框的外面再加一层常规的投影</p>
+<ul>
+<li>双重边框也可以用<code>outline</code>实现，通过<code>outline-offset</code>属性可以控制它跟元素边缘之间的间距，这个属性可以接受负值<h3 id="3-背景图片偏移"><a href="#3-背景图片偏移" class="headerlink" title="3. 背景图片偏移"></a>3. 背景图片偏移</h3>很多时候，我们想针对容器某个角对背景图片做偏移定位，如右下角，通常我们对背景图片使用: <code>background-position: bottom right</code>来让背景图片定位右下角，但是紧贴边缘的效果让视觉很不舒服，这时如果想让背景图片距离边缘有一定的间隙，要怎么实现呢?</li>
+</ul>
+<h4 id="background-position方案"><a href="#background-position方案" class="headerlink" title="background-position方案"></a>background-position方案</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: url(a.svg) no-repeat bottom right #58a;</span><br><span class="line">background-position: right 20px bottom 10px;</span><br></pre></td></tr></table></figure>
+<p>效果图:<br><img src="https://user-gold-cdn.xitu.io/2018/10/5/166431830815fb6d?w=376&amp;h=224&amp;f=png&amp;s=10944" alt=""></p>
+<h4 id="background-origin方案"><a href="#background-origin方案" class="headerlink" title="background-origin方案"></a>background-origin方案</h4><p>若我们想让背景图片的偏移量与内边距一致，如果使用<code>background-position</code>方案，代码看起来是这样的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">padding: 10px;</span><br><span class="line">background: url(a.svg) no-repeat #58a;</span><br><span class="line">background-position: right 10px bottom 10px;</span><br></pre></td></tr></table></figure></p>
+<p>这段代码不够DRY(don’t repeat yourself)，每次改内边距时，我们都需要改动3个地方，这时可以考虑使用<code>background-origin</code>来优化这段代码</p>
+<blockquote>
+<p>相信很多人都写过类似<code>background-position: top left</code>这样的代码，那这里的top left到底是哪里的左上角，每个元素身上都存在3个矩形框<code>(border box, padding box, content box)</code>,而<code>background-position</code>是以<code>padding box</code>为准的，top left默认指的是padding box的左上角</p>
+</blockquote>
+<p><code>background-origin</code>的默认值是<code>padding-box</code>, 通过将<code>background-origin</code>设定为<code>content-box</code>,我们在<code>background-position</code>中设定的边角关键字将会以内容区的边缘作为基准，这时就与内边距保持一致了，代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">padding: 10px;</span><br><span class="line">background: url(a.svg) no-repeat #58a bottom right;</span><br><span class="line">background-origin: content-box;</span><br></pre></td></tr></table></figure></p>
+<h4 id="calc方案"><a href="#calc方案" class="headerlink" title="calc方案"></a>calc方案</h4><p>calc函数允许我们对距离进行运算，代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: url(a.svg) no-repeat;</span><br><span class="line">background-position: calc(100% - 20px) calc(100% - 10px);</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-边框内圆角"><a href="#4-边框内圆角" class="headerlink" title="4. 边框内圆角"></a>4. 边框内圆角</h3><p>这是我们想要实现的效果图:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/166433ae7e765c16?w=464&amp;h=280&amp;f=png&amp;s=19710" alt=""><br>这个效果如果采用两个元素，我们可以很容易地实现，那如果想利用前面的知识用一个元素实现呢？<br>我们需要利用<code>outline</code>描边不会跟着圆角走，而<code>box-shadow</code>则是会的这两个特性，代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">background: tan;</span><br><span class="line">border-radius: .8em;</span><br><span class="line">padding: 1em;</span><br><span class="line">box-shadow: 0 0 0 .6em #655;</span><br><span class="line">outline: .6em solid #655;</span><br></pre></td></tr></table></figure></p>
+<p>这里的box-shadow的扩张值可以直接使用圆角值的一半</p>
+<blockquote>
+<p>这个方案依赖的特性是描边不跟着圆角走，但以后可能会修改，所以无法保证这种行为会永远不变</p>
+</blockquote>
+<h3 id="5-条纹背景"><a href="#5-条纹背景" class="headerlink" title="5. 条纹背景"></a>5. 条纹背景</h3><h4 id="水平条纹"><a href="#水平条纹" class="headerlink" title="水平条纹"></a>水平条纹</h4><p>利用css线性渐变属性<code>linear-gradient</code>属性和<code>background-size</code>，我们可以实现本来需要用背景图片才能实现的好看的条纹背景</p>
+<p>基础的渐变情况是这样的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3, #58a)</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/16643607d81d21a8?w=440&amp;h=424&amp;f=png&amp;s=12161" alt=""><br>如果我们将这两个色标拉近一点:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 20%, #58a 80%)</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/1664367514ae1507?w=436&amp;h=428&amp;f=png&amp;s=9920" alt=""><br>20% 80%表示#fb3到#58a的渐变区域为20%-80%,其它位置都为实色，<br>40% 60%表示渐变区域仅为40%-60%之间,<br>50% 50%则表示全部区域都为实色区域了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 50%, #58a 50%);</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/16643666b97c7204?w=430&amp;h=426&amp;f=png&amp;s=5212" alt=""><br>渐变是一种由代码生成的图像，我们能像对待其它任何背景图像那样来对待它，增加<code>background-size</code>来调整尺寸:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 50%, #58a 50%);</span><br><span class="line"># 100% 表示宽度， 30px表示高度</span><br><span class="line">background-size: 100% 30px;</span><br></pre></td></tr></table></figure></p>
+<p>默认是重复平铺的,效果图如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/1664370788e5cddf?w=430&amp;h=426&amp;f=png&amp;s=5225" alt=""><br>创建不等宽的条纹:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 30%, #58a 30%);</span><br><span class="line">background-size: 100% 30px;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/1664373d150cb9c3?w=428&amp;h=430&amp;f=png&amp;s=5404" alt=""><br>为了避免每次改动条纹宽度都需要改动两个数字，我们可以根据以下规范对代码进行调整</p>
+<blockquote>
+<p>如果某个色标的位置值比整个列表中在它之前的色标的位置值都要小，则该色标的位置值会被设置为它前面所有色标位置值的最大值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 30%, #58a 0);</span><br><span class="line">background-size: 100% 30px;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>这样可以实现跟上图一样的结果，但代码会更加DRY<br>如果要创建三种颜色但水平条纹，也是很简单的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 33.3%, #58a 0, #58a 66.6%, yellowgreen 0);</span><br><span class="line">background-size: 100% 45px;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/166437859fb491b8?w=432&amp;h=426&amp;f=png&amp;s=4943" alt=""></p>
+<h4 id="垂直条纹"><a href="#垂直条纹" class="headerlink" title="垂直条纹"></a>垂直条纹</h4><p>只需要增加一个参数就可以实现，即渐变的角度(方向)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(to right, #fb3 50%, #58a 0);</span><br><span class="line">background-size: 30px 100%;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/166437a34f8cc8be?w=428&amp;h=418&amp;f=png&amp;s=5138" alt=""></p>
+<h4 id="斜向条纹"><a href="#斜向条纹" class="headerlink" title="斜向条纹"></a>斜向条纹</h4><p>按照上面的思路，我们写出了下面的代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(45deg, #fb3 50%, #58a 0);</span><br><span class="line">background-size: 30px 30px;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/166437c6450f74b8?w=426&amp;h=434&amp;f=png&amp;s=10871" alt=""></p>
+<p>好像结果跟想象的不太一样，正确的思路应该是增加2个色块，一个贴片包含4条条纹，而不是两条<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75% #58a 0);</span><br><span class="line">background-size: 30px 30px;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/166437f46de6d79a?w=440&amp;h=442&amp;f=png&amp;s=15843" alt=""><br>这时我们又发现另一个问题，条纹比预想的要细，那么background-size的宽高应该如何计算呢?<br>根据勾股定理计算得(具体过程不详细说明),如果想让条纹宽度为15px,就需要把background-size指定为2x15√2, 大约为42.4px<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75% #58a 0);</span><br><span class="line">background-size: 42px 42px;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/166438703eb285e8?w=434&amp;h=418&amp;f=png&amp;s=12182" alt=""></p>
+<h4 id="更好的斜向条纹"><a href="#更好的斜向条纹" class="headerlink" title="更好的斜向条纹"></a>更好的斜向条纹</h4><p>根据上面创造斜向条纹的方法，如果我们想让条纹的角度是60度的话怎么办，若是单纯只改变角度似乎不能实现</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/10/5/166438ad0d083277?w=442&amp;h=430&amp;f=png&amp;s=16375" alt=""></p>
+<p>其实我们有更好的方法来创建斜向条纹, 即<code>repeating-linear-gradient()</code>，它的工作方式与<code>linear-gradient()</code>类似，只有一点不同：色标是无限循环重复的，直到填满整个背景,因此我们想实现的60度斜向条纹这样写即可:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: repeating-linear-gradient(60deg, #fb3, #fb3 15px, #58a 0, #58a 30px);</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/17/webpack能为我们做些什么/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1558,206 +1734,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/css世界/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="linli">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="林莉的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/16/css世界/" itemprop="url">css世界</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T16:32:21+08:00">
-                2018-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>从事前端工作一年了，最近越来越觉得自己的css学得不好，虽然基本能实现项目中需要实现的效果，但是还是觉得自己了解得并不深入，最近看了张鑫旭老师写的css世界，真心觉得css真是太博大精深了，张老师讲的东西很多都是我们平时经常遇到却很少时候会知道为什么会这样的一些情况，我也通过这一篇文章来记录一下自己的学习过程，有兴趣的同学还是得买本书看看……</p>
-<h3 id="css中的流"><a href="#css中的流" class="headerlink" title="css中的流"></a>css中的流</h3><ul>
-<li><p>css世界中的流其实跟现实世界中的水流是类似的，例如:</p>
-<ol>
-<li>水流会自动铺满容器，而div也会自动铺满容器</li>
-<li>在水流中放入木头，木头依次排列，而css世界中的图片文字也会依次排列，空间不足时换行</li>
-</ol>
-</li>
-<li>流是怎样影响整个css世界的呢？<ol>
-<li>让html的默认表现符合“流”</li>
-<li>通过流的破坏实现特殊布局</li>
-<li>通过改变流向实现不同的布局</li>
-</ol>
-</li>
-</ul>
-<h3 id="块级元素"><a href="#块级元素" class="headerlink" title="块级元素"></a>块级元素</h3><p><code>display: block; display: table; display: list-item;</code> 的元素都是块级元素，都符合块级元素的显示特征</p>
-<ul>
-<li><p>为什么<code>display: list-item</code>的元素会出现项目符号？</p>
-<blockquote>
-<p>因为生成了一个附加盒子，学名为“标记盒子”，专门用来存放圆点，数字这些项目符号，IE浏览器下伪元素不支持list-item或许是无法创建这个“标记盒子”导致的</p>
-</blockquote>
-</li>
-<li><p><code>display: inline-block</code>是由什么盒子构成的？</p>
-<blockquote>
-<p>又生成了一个盒子，即每个元素都有两个盒子，外在盒子和容器盒子，外在盒子负责元素是否是一行显示，容器盒子负责宽高，内容呈现等，那么，<code>display:inline-block</code>则是由外在的inline和内在的block组成，因此可以在一行显示又可以设置宽高</p>
-</blockquote>
-</li>
-<li><p>你真的了解width: auto吗？</p>
-<p>  1.元素默认的width值为auto，这就意味着元素会充分利用可用空间，但是，当我们设置了<code>width: 100%</code>或其他固定宽度后流动性就丢失了，也失去了margin/border/padding和content内容区域自动分配水平空间的机制</p>
-<ol start="2">
-<li>我们经常犯的错误是设置<code>display: block</code>后又设置了<code>width: 100%</code>, 其实width: 100%是没有必要的，这会让元素丢失流动性、包裹性等特性</li>
-<li>width值默认是作用在<code>content-box</code>上的，通过设置<code>box-sizing</code>可以改变<code>width</code>的作用盒子，如 <code>padding-box</code>,<code>border-box</code>，但是不存在<code>margin-box</code></li>
-</ol>
-</li>
-<li><p>为何我们经常设置的<code>height: 100%</code>会失效？</p>
-</li>
-</ul>
-<blockquote>
-<p>规范中写道：如果包含块的高度没有显式指定，并且该元素不是绝对定位，则计算值为auto, 一句话总结：因为解释成了auto, 而 <code>auto * 100 / 100 = NaN</code></p>
-</blockquote>
-<ul>
-<li><p>如何让height: 100%生效？</p>
-<ol>
-<li><p>设定显式的高度值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">html, body &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用绝对定位</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">  position: absolute;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ul>
-<p>注： 绝对定位元素的宽高百分比计算是相对于padding-box的，举个例子如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;box&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;child&quot;&gt;高度100px&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;box rel&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;child&quot;&gt;高度160px&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  height: 160px;</span><br><span class="line">  padding: 30px;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">  background-color: #beceeb;</span><br><span class="line">&#125;</span><br><span class="line">.child &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">  background: #cd0000;</span><br><span class="line">&#125;</span><br><span class="line">.rel &#123;</span><br><span class="line">  position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.rel &gt; .child &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  position: absolute;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/11543643-70569847e6c288a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="绝对定位和非绝对定位百分比高度对比.png"></p>
-<ul>
-<li>min-width/max-width和min-height/max-height</li>
-</ul>
-<ol>
-<li>初始值：<code>min-*</code>初始值是<code>auto</code>, <code>max-*</code> 初始值是<code>none</code></li>
-<li>max-width会覆盖!important</li>
-<li>min-width如果比max-width大，则min-width生效</li>
-<li>通过max-height实现任意高度元素的展开收起，点击<a href="http://demo.cssworld.cn/3/3-2.php可以查看具体效果，关键代码如下：" target="_blank" rel="noopener">http://demo.cssworld.cn/3/3-2.php可以查看具体效果，关键代码如下：</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.element &#123;</span><br><span class="line">  max-height: 0;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  transition: max-height .25s;</span><br><span class="line">&#125;</span><br><span class="line">.element .active &#123;</span><br><span class="line">  max-height: 666px; #一个足够大的最大高度值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="内联元素"><a href="#内联元素" class="headerlink" title="内联元素"></a>内联元素</h3><ul>
-<li>内联盒模型</li>
-</ul>
-<ol>
-<li>内容区域：可以理解为文本选中区域</li>
-<li>内联盒子：元素的外在盒子，用来决定元素是内联还是块级，可以细分为内联盒子和匿名内联盒子</li>
-<li>行框盒子：每一行就是一个行框盒子，每个行框盒子又是由一个个内联盒子组成的</li>
-<li>包含盒子：<p>标签就是一个包含盒子，此盒子由一行一行的行框盒子组成</p></li>
-</ol>
-<h3 id="盒尺寸四大家族"><a href="#盒尺寸四大家族" class="headerlink" title="盒尺寸四大家族"></a>盒尺寸四大家族</h3><ol>
-<li>深入理解content<br>(1) 替换元素： 通过修改某个属性值，呈现的内容就可以被替换的元素，如<code>&lt;img&gt;</code>、<code>&lt;video&gt;</code>、<code>&lt;textarea&gt;</code><br>(2) 替换元素的尺寸计算规则<br>a. 固有尺寸： 默认尺寸<br>b. HTML尺寸：如<code>img</code>的<code>width</code>和<code>height</code>属性<br>c. css尺寸：通过css设定的尺寸<br>优先级： css尺寸 &gt; HTML尺寸 &gt; 固有尺寸<br>若上面的尺寸都没设定，则表现为<code>300px * 150px</code><br>(3) 异步加载图片的占位图片<code>&lt;img&gt;</code>通过以下设置可以提高性能<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">img &#123;visibility: hidden&#125;</span><br><span class="line">img[src] &#123;visibility: visible;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>firefox会把img当作一个普通的内联元素，css重置时建议加上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; img &#123;display: inline-block;&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1808,7 +1784,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
