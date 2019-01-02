@@ -229,6 +229,311 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/小程序开发日记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="linli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林莉的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/小程序开发日记/" itemprop="url">小程序开发日记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T17:16:55+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在学小程序开发，想做一个小demo练练手，边学边总结，希望能对以后想学的同学有点作用：</p>
+<h4 id="request请求豆瓣图书接口报了403"><a href="#request请求豆瓣图书接口报了403" class="headerlink" title="request请求豆瓣图书接口报了403"></a>request请求豆瓣图书接口报了403</h4><p>查资料后才知道豆瓣图书的接口对小程序不开放了…用了同事反向代理豆瓣api的接口才搞定的</p>
+<h4 id="request请求同事服务器的接口报了400"><a href="#request请求同事服务器的接口报了400" class="headerlink" title="request请求同事服务器的接口报了400"></a>request请求同事服务器的接口报了400</h4><p>通过wx.request请求资源时需要加上header头部<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">header: &#123;</span><br><span class="line">  &quot;Content-Type&quot;: &quot;json&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">header: &#123;</span><br><span class="line">  &quot;Content-Type&quot;: &quot;application-json&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="如何将上一个页面的数据传递给跳转到的下一个页面"><a href="#如何将上一个页面的数据传递给跳转到的下一个页面" class="headerlink" title="如何将上一个页面的数据传递给跳转到的下一个页面"></a>如何将上一个页面的数据传递给跳转到的下一个页面</h4><ul>
+<li>通过全局对象获取</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//app.js</span><br><span class="line">App(&#123;</span><br><span class="line">  globalData: &#123;</span><br><span class="line">    userName: &apos;&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>然后在页面中，可以通过 getApp() 方法获取并设置app.js中的全局对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let app = getApp()</span><br><span class="line">let userName = app.globalData.userName</span><br><span class="line">app.globalData.userName = &apos;hello kitty&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过本地缓存设置和获取</li>
+</ul>
+<p>小程序提供了<code>wx.setStorage</code>，<code>wx.getStorage</code>, <code>wx.removeStorage</code>等本地存储的api供我们使用, 具体请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/api/data.html#wxsetstorageobject" target="_blank" rel="noopener">官方文档</a>，通过这种方式一般存储的是一些不经常改变的静态变量</p>
+<ul>
+<li>通过url的query传值后在下一个页面的onLoad中获取</li>
+</ul>
+<p>可以将数据附加在url中，如<code>/book?id=100</code>, 然后在下一个页面的onLoad中获取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onLoad (option) &#123;</span><br><span class="line">  this.setData (&#123;id: option.id&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>通过getCurrentPages()获取</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">onLoad () &#123;</span><br><span class="line">  let pages = getCurrentPages()</span><br><span class="line">  let prevPage = pages[pages.length - 2]</span><br><span class="line">  this.setData(&#123;detail: prevPage.data.detail&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>未完待续…</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/obs-node-media-server-flv-js实现录播和直播/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="linli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林莉的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/obs-node-media-server-flv-js实现录播和直播/" itemprop="url">obs+node-media-server+flv.js实现录播和直播</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T17:12:43+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><ul>
+<li>下载obs软件，进行视频的录制</li>
+<li>通过node-media-server开启一个服务，在obs中推流到该服务器</li>
+<li>通过flv.js配合html5的video标签实现node-media-server中视频源的播放</li>
+</ul>
+<h3 id="开始实现"><a href="#开始实现" class="headerlink" title="开始实现"></a>开始实现</h3><h4 id="obs的使用"><a href="#obs的使用" class="headerlink" title="obs的使用"></a>obs的使用</h4><p>obs的下载请移步<a href="https://obsproject.com/" target="_blank" rel="noopener">官网</a>，有windows, mac, linux 三个平台的版本可供下载<br>我这里使用的是mac版，其他版本的使用应该也差不多</p>
+<ul>
+<li>首先需要新建一个场景<br><img src="https://upload-images.jianshu.io/upload_images/11543643-e3898c40c5fdf380.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建场景.png"><br>这里有很多种场景可以使用，我用显示捕获来示范一下吧…<br><img src="https://upload-images.jianshu.io/upload_images/11543643-832208bc792de999.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建场景.png"><br>可以对场景进行命名，我直接使用默认的名字，点击确定<br><img src="https://upload-images.jianshu.io/upload_images/11543643-80bcfcca543f70ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建场景.png"></li>
+</ul>
+<p>再次点击确定，这个时候场景就创建成功了，拖动场景可以将场景进行缩放，缩放到遮住黑色的背景就好了<br><img src="https://upload-images.jianshu.io/upload_images/11543643-c7a8baae2b871c92.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="缩放场景.png"></p>
+<ul>
+<li>推流<br>视频的本质其实是一张张截下来的图片，我们需要将这一张张图片放到一个地方，然后前端就可以从这个地方读取，从而展示出来，因此在这之前我们需要开启一个服务，作为前端获取视频的源地址</li>
+</ul>
+<h4 id="node-media-server开启服务"><a href="#node-media-server开启服务" class="headerlink" title="node-media-server开启服务"></a>node-media-server开启服务</h4><ol>
+<li><p>新建一个空白的文件夹，执行<code>npm init</code>, 根据提示输入相关信息后，下载node-media-server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install node-media-server --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建一个入口文件index.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const NodeMediaServer = require(&apos;node-media-server&apos;);</span><br><span class="line"></span><br><span class="line">const config = &#123;</span><br><span class="line">  rtmp: &#123;</span><br><span class="line">    port: 1935,</span><br><span class="line">    chunk_size: 60000,</span><br><span class="line">    gop_cache: true,</span><br><span class="line">    ping: 60,</span><br><span class="line">    ping_timeout: 30</span><br><span class="line">  &#125;,</span><br><span class="line">  http: &#123;</span><br><span class="line">    port: 8000,</span><br><span class="line">    allow_origin: &apos;*&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var nms = new NodeMediaServer(config)</span><br><span class="line">nms.run();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后在命令行中执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node index.js</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果看到下面的提示，表示我们已经成功开启node-media-server服务了<br><img src="https://upload-images.jianshu.io/upload_images/11543643-9472617ff06096a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="开启服务.png"></p>
+<h4 id="flv-js"><a href="#flv-js" class="headerlink" title="flv.js"></a>flv.js</h4><p>flv.js是来自Bilibli的开源项目。它解析FLV文件喂给原生HTML5 Video标签播放音视频数据，使浏览器在不借助Flash的情况下播放FLV成为可能。具体的介绍请自行google哈，继续刚才的项目</p>
+<ul>
+<li>新建一个index.html文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">	&lt;title&gt;直播&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;script src=&quot;https://cdn.bootcss.com/flv.js/1.4.0/flv.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;video id=&quot;videoElement&quot; width=&quot;100%&quot; controls&gt;&lt;/video&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        if (flvjs.isSupported()) &#123;</span><br><span class="line">            var videoElement = document.getElementById(&apos;videoElement&apos;);</span><br><span class="line">            var flvPlayer = flvjs.createPlayer(&#123;</span><br><span class="line">                type: &apos;flv&apos;,</span><br><span class="line">                url: &apos;http://localhost:8000/live/hello.flv&apos;</span><br><span class="line">            &#125;);</span><br><span class="line">            flvPlayer.attachMediaElement(videoElement);</span><br><span class="line">            flvPlayer.load();</span><br><span class="line">            flvPlayer.play();</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>这里遇到了一个坑，可能是mac的原因，默认视频是没有自动播放的，而且一开始video标签我也没有加上controls，所以网页上一直显示的是一张静态的图片，偶然才发现原来是视频处于暂停状态 =_=!!</p>
+</blockquote>
+<h4 id="可以进行录播啦"><a href="#可以进行录播啦" class="headerlink" title="可以进行录播啦~"></a>可以进行录播啦~</h4><ul>
+<li>点击obs中的设置，进入设置页面，点击流，如果是在本地直播的话，流类型选择自定义流媒体服务器，url填写如图所示，流名称填写index.html设置的名字，本项目是<code>hello</code></li>
+</ul>
+<blockquote>
+<p>我们也可以通过bilibili等直播平台进行播放，这里就填写你bilibili上的直播链接和名称</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/11543643-4896159d8e19ce11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>点击obs的开始推流按钮<br><img src="https://upload-images.jianshu.io/upload_images/11543643-2aa25cf702854ee5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ul>
+<p>这时双击在浏览器打开index.html就可以看到直播啦，记得点击视频下方的开始按钮~</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/css世界/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -932,7 +1237,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -945,7 +1250,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -992,7 +1297,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
