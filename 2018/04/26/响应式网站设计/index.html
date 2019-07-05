@@ -87,17 +87,17 @@
 <meta property="og:site_name" content="林莉的博客">
 <meta property="og:description" content="随着设备种类的增多，网站设计是否能响应式地根据页面大小进行适配变得越来越重要。下面是在进行响应式设计过程中需要注意的几个点：  设置viewport1&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt; 图片溢出问题假设设备的宽度为1000px, 而图片的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/04/images/responsive.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/04/images/responsive-fluid.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/04/images/responsive-shifter.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/04/images/responsive-canvas.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/04/images/responsive-table.jpeg">
-<meta property="og:image" content="http://yoursite.com/2018/04/images/responsive-table.jpeg">
-<meta property="og:updated_time" content="2019-07-05T09:11:11.638Z">
+<meta property="og:image" content="http://yoursite.com/images/responsive.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/responsive-fluid.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/responsive-shifter.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/responsive-canvas.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/responsive-table.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/responsive-table.jpeg">
+<meta property="og:updated_time" content="2019-07-05T09:40:16.872Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="响应式网站设计">
 <meta name="twitter:description" content="随着设备种类的增多，网站设计是否能响应式地根据页面大小进行适配变得越来越重要。下面是在进行响应式设计过程中需要注意的几个点：  设置viewport1&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt; 图片溢出问题假设设备的宽度为1000px, 而图片的">
-<meta name="twitter:image" content="http://yoursite.com/2018/04/images/responsive.jpeg">
+<meta name="twitter:image" content="http://yoursite.com/images/responsive.jpeg">
 
 
 
@@ -325,7 +325,7 @@
 <h4 id="常见的响应式布局"><a href="#常见的响应式布局" class="headerlink" title="常见的响应式布局"></a>常见的响应式布局</h4><ol>
 <li>column drop(掉落列模型)</li>
 </ol>
-<p> <img src="../../images/responsive.jpeg" alt="column drop模型.png"></p>
+<p> <img src="/images/responsive.jpeg" alt="column drop模型.png"></p>
 <ul>
 <li><p>小屏幕设备布局核心代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-wrap: wrap;</span><br><span class="line">&#125;</span><br><span class="line">.box &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -338,21 +338,21 @@
 </li>
 </ul>
 <ol start="2">
-<li>mostly fluid (大体流动模型)<br>mostly fluid 跟 column drop 很类似，只是在column drop的基础上，在最大尺寸时两边增加margin<br><img src="../../images/responsive-fluid.jpeg" alt="mostly fluid模型.png"></li>
+<li>mostly fluid (大体流动模型)<br>mostly fluid 跟 column drop 很类似，只是在column drop的基础上，在最大尺寸时两边增加margin<br><img src="/images/responsive-fluid.jpeg" alt="mostly fluid模型.png"></li>
 </ol>
 <ul>
 <li>大屏幕时的核心代码如下:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  width: 700px;</span><br><span class="line">  margin-left: auto;</span><br><span class="line">  margin-right: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ol start="3">
-<li>layout shifter(布局切换器)<br>layout shifter跟column drop也很类似，不同于column drop, layout shifter增加了order来调整div的顺序<br><img src="../../images/responsive-shifter.jpeg" alt="layout shifter模型.png"></li>
+<li>layout shifter(布局切换器)<br>layout shifter跟column drop也很类似，不同于column drop, layout shifter增加了order来调整div的顺序<br><img src="/images/responsive-shifter.jpeg" alt="layout shifter模型.png"></li>
 </ol>
 <ul>
 <li>大屏幕时的核心代码如下:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@media sceen and (min-width: 600px) &#123;</span><br><span class="line">  .dark &#123;</span><br><span class="line">    width: 25%;</span><br><span class="line">    order: 1;</span><br><span class="line">  &#125;</span><br><span class="line">  .container 2 &#123;</span><br><span class="line">    width: 50%;</span><br><span class="line">  &#125;</span><br><span class="line">  .red &#123;</span><br><span class="line">     width: 25%;</span><br><span class="line">     order: -1;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ol start="4">
-<li>off canvas (画布之外模型)<br>off canvas模型较为常见，先在小屏幕中隐藏导航栏等使用频率不高的组件，然后通过点击某个图标才显示导航栏<br><img src="../../images/responsive-canvas.jpeg" alt="off canvas模型.png"></li>
+<li>off canvas (画布之外模型)<br>off canvas模型较为常见，先在小屏幕中隐藏导航栏等使用频率不高的组件，然后通过点击某个图标才显示导航栏<br><img src="/images/responsive-canvas.jpeg" alt="off canvas模型.png"></li>
 </ol>
 <ul>
 <li><p>小屏幕中的核心实现代码如下：</p>
@@ -368,9 +368,9 @@
 <h4 id="响应式表格"><a href="#响应式表格" class="headerlink" title="响应式表格"></a>响应式表格</h4><p>虽然表格布局已经几乎被我们摒弃掉了，但是还是有一些需求需要用到表格来展示数据，比如篮球比赛的分数等，那么响应式表格要怎么实现呢？</p>
 <ol>
 <li>隐藏某些不重要的列，也就是设置为<code>display: none</code>(so easy, right?)</li>
-<li>将纵向排列转为横向排列<br>举个例子：<br><img src="../../images/responsive-table.jpeg" alt="纵向排列表格.png"></li>
+<li>将纵向排列转为横向排列<br>举个例子：<br><img src="/images/responsive-table.jpeg" alt="纵向排列表格.png"></li>
 </ol>
-<p><img src="../../images/responsive-table.jpeg" alt="横向排列表格.png"><br>实现的核心代码如下：</p>
+<p><img src="/images/responsive-table.jpeg" alt="横向排列表格.png"><br>实现的核心代码如下：</p>
 <ul>
 <li><p>html结构：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">      &lt;thead&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;th&gt;Team&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;1st&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;2nd&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;3rd&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;4th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;5th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;6th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;7th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;8th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;9th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;Final&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">      &lt;/thead&gt;</span><br><span class="line">      &lt;tbody&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td data-th=&quot;Team&quot;&gt;Toronto&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;1st&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;2nd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;3rd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;4th&quot;&gt;4&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;5th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;6th&quot;&gt;1&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;7th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;8th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;9th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;Final&quot;&gt;5&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td data-th=&quot;Team&quot;&gt;San Francisco&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;1st&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;2nd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;3rd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;4th&quot;&gt;4&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;5th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;6th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;7th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;8th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;9th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;Final&quot;&gt;4&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">      &lt;/tbody&gt;</span><br></pre></td></tr></table></figure>

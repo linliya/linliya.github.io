@@ -86,18 +86,18 @@
 <meta property="og:site_name" content="林莉的博客">
 <meta property="og:description" content="实现思路 下载obs软件，进行视频的录制 通过node-media-server开启一个服务，在obs中推流到该服务器 通过flv.js配合html5的video标签实现node-media-server中视频源的播放  开始实现obs的使用obs的下载请移步官网，有windows, mac, linux 三个平台的版本可供下载我这里使用的是mac版，其他版本的使用应该也差不多  首先需要新建一个">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/05/images/obs1.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/images/obs2.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/images/obs3.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/images/obs4.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/images/obs5.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/images/obs6.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/images/obs7.png">
-<meta property="og:updated_time" content="2019-07-05T09:23:25.309Z">
+<meta property="og:image" content="http://yoursite.com/images/obs1.png">
+<meta property="og:image" content="http://yoursite.com/images/obs2.png">
+<meta property="og:image" content="http://yoursite.com/images/obs3.png">
+<meta property="og:image" content="http://yoursite.com/images/obs4.png">
+<meta property="og:image" content="http://yoursite.com/images/obs5.png">
+<meta property="og:image" content="http://yoursite.com/images/obs6.png">
+<meta property="og:image" content="http://yoursite.com/images/obs7.png">
+<meta property="og:updated_time" content="2019-07-05T09:41:29.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="obs+node-media-server+flv.js实现录播和直播">
 <meta name="twitter:description" content="实现思路 下载obs软件，进行视频的录制 通过node-media-server开启一个服务，在obs中推流到该服务器 通过flv.js配合html5的video标签实现node-media-server中视频源的播放  开始实现obs的使用obs的下载请移步官网，有windows, mac, linux 三个平台的版本可供下载我这里使用的是mac版，其他版本的使用应该也差不多  首先需要新建一个">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/images/obs1.png">
+<meta name="twitter:image" content="http://yoursite.com/images/obs1.png">
 
 
 
@@ -314,9 +314,9 @@
 </ul>
 <h3 id="开始实现"><a href="#开始实现" class="headerlink" title="开始实现"></a>开始实现</h3><h4 id="obs的使用"><a href="#obs的使用" class="headerlink" title="obs的使用"></a>obs的使用</h4><p>obs的下载请移步<a href="https://obsproject.com/" target="_blank" rel="noopener">官网</a>，有windows, mac, linux 三个平台的版本可供下载<br>我这里使用的是mac版，其他版本的使用应该也差不多</p>
 <ul>
-<li>首先需要新建一个场景<br><img src="../../images/obs1.png" alt="新建场景.png"><br>这里有很多种场景可以使用，我用显示捕获来示范一下吧…<br><img src="../../images/obs2.png" alt="新建场景.png"><br>可以对场景进行命名，我直接使用默认的名字，点击确定<br><img src="../../images/obs3.png" alt="新建场景.png"></li>
+<li>首先需要新建一个场景<br><img src="/images/obs1.png" alt="新建场景.png"><br>这里有很多种场景可以使用，我用显示捕获来示范一下吧…<br><img src="/images/obs2.png" alt="新建场景.png"><br>可以对场景进行命名，我直接使用默认的名字，点击确定<br><img src="/images/obs3.png" alt="新建场景.png"></li>
 </ul>
-<p>再次点击确定，这个时候场景就创建成功了，拖动场景可以将场景进行缩放，缩放到遮住黑色的背景就好了<br><img src="../../images/obs4.png" alt="缩放场景.png"></p>
+<p>再次点击确定，这个时候场景就创建成功了，拖动场景可以将场景进行缩放，缩放到遮住黑色的背景就好了<br><img src="/images/obs4.png" alt="缩放场景.png"></p>
 <ul>
 <li>推流<br>视频的本质其实是一张张截下来的图片，我们需要将这一张张图片放到一个地方，然后前端就可以从这个地方读取，从而展示出来，因此在这之前我们需要开启一个服务，作为前端获取视频的源地址</li>
 </ul>
@@ -331,7 +331,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node index.js</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>如果看到下面的提示，表示我们已经成功开启node-media-server服务了<br><img src="../../images/obs5.png" alt="开启服务.png"></p>
+<p>如果看到下面的提示，表示我们已经成功开启node-media-server服务了<br><img src="/images/obs5.png" alt="开启服务.png"></p>
 <h4 id="flv-js"><a href="#flv-js" class="headerlink" title="flv.js"></a>flv.js</h4><p>flv.js是来自Bilibli的开源项目。它解析FLV文件喂给原生HTML5 Video标签播放音视频数据，使浏览器在不借助Flash的情况下播放FLV成为可能。具体的介绍请自行google哈，继续刚才的项目</p>
 <ul>
 <li>新建一个index.html文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">	&lt;title&gt;直播&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;script src=&quot;https://cdn.bootcss.com/flv.js/1.4.0/flv.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;video id=&quot;videoElement&quot; width=&quot;100%&quot; controls&gt;&lt;/video&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        if (flvjs.isSupported()) &#123;</span><br><span class="line">            var videoElement = document.getElementById(&apos;videoElement&apos;);</span><br><span class="line">            var flvPlayer = flvjs.createPlayer(&#123;</span><br><span class="line">                type: &apos;flv&apos;,</span><br><span class="line">                url: &apos;http://localhost:8000/live/hello.flv&apos;</span><br><span class="line">            &#125;);</span><br><span class="line">            flvPlayer.attachMediaElement(videoElement);</span><br><span class="line">            flvPlayer.load();</span><br><span class="line">            flvPlayer.play();</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
@@ -346,9 +346,9 @@
 <blockquote>
 <p>我们也可以通过bilibili等直播平台进行播放，这里就填写你bilibili上的直播链接和名称</p>
 </blockquote>
-<p><img src="../../images/obs6.png" alt="image.png"></p>
+<p><img src="/images/obs6.png" alt="image.png"></p>
 <ul>
-<li>点击obs的开始推流按钮<br><img src="../../images/obs7.png" alt="image.png"></li>
+<li>点击obs的开始推流按钮<br><img src="/images/obs7.png" alt="image.png"></li>
 </ul>
 <p>这时双击在浏览器打开index.html就可以看到直播啦，记得点击视频下方的开始按钮~</p>
 

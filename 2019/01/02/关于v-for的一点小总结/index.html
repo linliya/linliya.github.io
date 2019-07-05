@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="林莉的博客">
 <meta property="og:description" content="简单介绍在vue里面，我们通过v-for指令来渲染一个数组列表，列表项需要我们定义一个别名，即: 12345&amp;lt;ul id=&amp;quot;example-1&amp;quot;&amp;gt;  &amp;lt;li v-for=&amp;quot;item in items&amp;quot;&amp;gt;    &amp;#123;&amp;#123; item.message &amp;#125;&amp;#125;  &amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/01/images/v-for">
-<meta property="og:image" content="http://yoursite.com/2019/01/images/v-for-gif">
-<meta property="og:updated_time" content="2019-07-05T09:02:32.105Z">
+<meta property="og:image" content="http://yoursite.com/images/v-for">
+<meta property="og:image" content="http://yoursite.com/images/v-for-gif">
+<meta property="og:updated_time" content="2019-07-05T09:40:57.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="了解一下v-for的原理">
 <meta name="twitter:description" content="简单介绍在vue里面，我们通过v-for指令来渲染一个数组列表，列表项需要我们定义一个别名，即: 12345&amp;lt;ul id=&amp;quot;example-1&amp;quot;&amp;gt;  &amp;lt;li v-for=&amp;quot;item in items&amp;quot;&amp;gt;    &amp;#123;&amp;#123; item.message &amp;#125;&amp;#125;  &amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/images/v-for">
+<meta name="twitter:image" content="http://yoursite.com/images/v-for">
 
 
 
@@ -308,13 +308,13 @@
 <p>在上面这个例子中，<code>items</code>是我们要渲染的数组列表，<code>item</code>是数组列表项的别名，当然，我们可以给<code>v-for</code>添加第二个参数作为当前项的索引:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul id=&quot;example-2&quot;&gt;</span><br><span class="line">  &lt;li v-for=&quot;(item, index) in items&quot;&gt;</span><br><span class="line">    &#123;&#123; index &#125;&#125; - &#123;&#123; item.message &#125;&#125;</span><br><span class="line">  &lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
 <p>有经验的同学可能会指出，上面的例子都少了一个属性: <code>key</code>，是的，官方文档建议我们给<code>v-for</code>渲染的每一个列表项指定一个<code>key</code>,那么，<code>key</code>的作用是什么呢？官方文档给了以下的解释：</p>
-<p><img src="../../images/v-for" alt=""></p>
+<p><img src="/images/v-for" alt=""></p>
 <h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><h3 id="问题1-什么是’就地复用’？"><a href="#问题1-什么是’就地复用’？" class="headerlink" title="问题1: 什么是’就地复用’？"></a>问题1: 什么是’就地复用’？</h3><p>这里我举一个简单的例子来说明一下：</p>
 <p>在一个玩具组装车间，小A, 小B, 小C，小D以及其他96个流水线工人一起完成组装玩具的工作，每个人都有自己的一辆玩具在组装，突然，小B肚子痛跑去上厕所了，但是小B的工作还没完成，为了不影响整体进度，工人都依次往前补，小C顶替了小B的工作，小D顶替了小C的工作，以此类推，这样虽然也是有点麻烦，还好工作按期完成了。</p>
 <p>这就是就地复用大概的思路，如果不采用就地复用，那么，当小B缺席之后，流水线上的工人（包括小B之前的）都要重新排序，100个人按照工号重新排序，重新获取自己的工作内容，这样子工作效率就大大降低了。</p>
 <p>在DOM中，就地复用的是那些没有变化的元素，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-for=&quot;item in items&quot;&gt;</span><br><span class="line">  &lt;input/&gt;</span><br><span class="line">  &#123;&#123;item.message&#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
 <p>在这段代码中，没有变化的元素就是<code>input</code>，当我们删除items的某个元素时，<code>item.message</code>会发生变化，因此渲染的数据发生了变化，但是已经存在dom中的<code>input</code>却会被就地复用，具体的演示效果如下：</p>
-<p><img src="../../images/v-for-gif" alt=""></p>
+<p><img src="/images/v-for-gif" alt=""></p>
 <h3 id="问题2-如何解决就地复用产生的问题？"><a href="#问题2-如何解决就地复用产生的问题？" class="headerlink" title="问题2: 如何解决就地复用产生的问题？"></a>问题2: 如何解决就地复用产生的问题？</h3><p>正如我们上面看到的那样，我们希望<code>input</code>也被重新渲染，这个问题的解决方案vue已经在文档中说的很清楚了，我们需要给每一个列表项加上一个唯一的<code>key</code>属性</p>
 <h3 id="问题3-key属性是如何解决问题的，它的原理是什么？"><a href="#问题3-key属性是如何解决问题的，它的原理是什么？" class="headerlink" title="问题3: key属性是如何解决问题的，它的原理是什么？"></a>问题3: key属性是如何解决问题的，它的原理是什么？</h3><p>这个问题就涉及到了虚拟DOM的diff算法了，具体原理可以查看<a href="https://www.zhihu.com/question/61064119/answer/183717717" target="_blank" rel="noopener">知乎的一篇文章</a></p>
 <h3 id="问题4-没有添加key属性或者key属性不是唯一的会出现什么坑？"><a href="#问题4-没有添加key属性或者key属性不是唯一的会出现什么坑？" class="headerlink" title="问题4: 没有添加key属性或者key属性不是唯一的会出现什么坑？"></a>问题4: 没有添加key属性或者key属性不是唯一的会出现什么坑？</h3><p>key属性需要绑定一个唯一的值，但是在我们的实际项目中，不一定会有这么一个唯一的值让我们绑定，因此习惯性我们会采用<code>index</code>作为<code>key</code>属性的值，这样做就容易产生问题了…</p>
