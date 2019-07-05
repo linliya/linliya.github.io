@@ -6,10 +6,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -136,7 +136,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/05/读书笔记-css揭秘1之背景与边框/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/05/读书笔记-css揭秘1之背景与边框/">
 
 
 
@@ -170,7 +170,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">林莉的博客</span>
         <span class="logo-line-after"><i></i></span>
@@ -200,7 +200,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -210,7 +210,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -253,7 +253,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="linli">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -318,25 +318,25 @@
       
         <h3 id="1-半透明边框失效问题"><a href="#1-半透明边框失效问题" class="headerlink" title="1. 半透明边框失效问题"></a>1. 半透明边框失效问题</h3><p>想通过以下代码实现白色背景外面的半透明白色背景，但好像并没有起作用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">border: 10px solid hsla(0, 0%, 100%);</span><br><span class="line">background: white;</span><br></pre></td></tr></table></figure>
-<p>原因是: 默认情况下，背景会延伸到边框所在的区域下层，意思是背景是以元素的border-box外边缘包含的内容渲染的，如下图所示，border-edge以内的内容都是背景，因此我们设置的半透明边框也就被白色背景所覆盖了<br><img src="/images/css-secret1" alt=""></p>
+<p>原因是: 默认情况下，背景会延伸到边框所在的区域下层，意思是背景是以元素的border-box外边缘包含的内容渲染的，如下图所示，border-edge以内的内容都是背景，因此我们设置的半透明边框也就被白色背景所覆盖了<br><img src="/images/css-secret1" alt></p>
 <ul>
 <li><p>解决方案<br>通过背景裁剪属性(background-clip)设定背景从padding-box的外边缘开始渲染，这时我们想要实现的效果就出来了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">border: 10px solid hsla(0, 0%, 100%);</span><br><span class="line">background: white;</span><br><span class="line">background-clip: padding-box;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>效果图<br><img src="/images/css-secret2" alt=""></p>
+<li><p>效果图<br><img src="/images/css-secret2" alt></p>
 </li>
 </ul>
 <h3 id="2-多重边框需要添加多余标签？"><a href="#2-多重边框需要添加多余标签？" class="headerlink" title="2. 多重边框需要添加多余标签？"></a>2. 多重边框需要添加多余标签？</h3><p>如果要我们实现多重边框，现在能想到的是不是使用多个元素来模拟？但是这样子的话就多了冗余标签了，其实，还有一个属性可以帮助我们实现这个功能, 那就是<code>box-shadow</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">background: yellowgreen;</span><br><span class="line">box-shadow: 0 0 0 10px #655,</span><br><span class="line">            0 0 0 15px deeppink</span><br><span class="line">            0 2px 5px 15px rgba(0, 0, 0, .6)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>效果图<br><img src="/images/css-secret3" alt=""></li>
+<li>效果图<br><img src="/images/css-secret3" alt></li>
 </ul>
 <p>唯一需要注意的是，box-shadow是层层叠加的，第一层投影位于最里层，依次类推，因此需要按照此规律调整扩张半径，比如说，在第一层边框的基础上，我们想在外圈再加一道5px的边框，那就需要指定扩张半径为15px(10px+5px)，还可以在这些边框的外面再加一层常规的投影</p>
 <ul>
 <li>双重边框也可以用<code>outline</code>实现，通过<code>outline-offset</code>属性可以控制它跟元素边缘之间的间距，这个属性可以接受负值<h3 id="3-背景图片偏移"><a href="#3-背景图片偏移" class="headerlink" title="3. 背景图片偏移"></a>3. 背景图片偏移</h3>很多时候，我们想针对容器某个角对背景图片做偏移定位，如右下角，通常我们对背景图片使用: <code>background-position: bottom right</code>来让背景图片定位右下角，但是紧贴边缘的效果让视觉很不舒服，这时如果想让背景图片距离边缘有一定的间隙，要怎么实现呢?</li>
 </ul>
 <h4 id="background-position方案"><a href="#background-position方案" class="headerlink" title="background-position方案"></a>background-position方案</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: url(a.svg) no-repeat bottom right #58a;</span><br><span class="line">background-position: right 20px bottom 10px;</span><br></pre></td></tr></table></figure>
-<p>效果图:<br><img src="/images/css-secret4" alt=""></p>
+<p>效果图:<br><img src="/images/css-secret4" alt></p>
 <h4 id="background-origin方案"><a href="#background-origin方案" class="headerlink" title="background-origin方案"></a>background-origin方案</h4><p>若我们想让背景图片的偏移量与内边距一致，如果使用<code>background-position</code>方案，代码看起来是这样的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">padding: 10px;</span><br><span class="line">background: url(a.svg) no-repeat #58a;</span><br><span class="line">background-position: right 10px bottom 10px;</span><br></pre></td></tr></table></figure></p>
 <p>这段代码不够DRY(don’t repeat yourself)，每次改内边距时，我们都需要改动3个地方，这时可以考虑使用<code>background-origin</code>来优化这段代码</p>
 <blockquote>
@@ -345,33 +345,33 @@
 <p><code>background-origin</code>的默认值是<code>padding-box</code>, 通过将<code>background-origin</code>设定为<code>content-box</code>,我们在<code>background-position</code>中设定的边角关键字将会以内容区的边缘作为基准，这时就与内边距保持一致了，代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">padding: 10px;</span><br><span class="line">background: url(a.svg) no-repeat #58a bottom right;</span><br><span class="line">background-origin: content-box;</span><br></pre></td></tr></table></figure></p>
 <h4 id="calc方案"><a href="#calc方案" class="headerlink" title="calc方案"></a>calc方案</h4><p>calc函数允许我们对距离进行运算，代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: url(a.svg) no-repeat;</span><br><span class="line">background-position: calc(100% - 20px) calc(100% - 10px);</span><br></pre></td></tr></table></figure></p>
 <h3 id="4-边框内圆角"><a href="#4-边框内圆角" class="headerlink" title="4. 边框内圆角"></a>4. 边框内圆角</h3><p>这是我们想要实现的效果图:</p>
-<p><img src="/images/css-secret5" alt=""><br>这个效果如果采用两个元素，我们可以很容易地实现，那如果想利用前面的知识用一个元素实现呢？<br>我们需要利用<code>outline</code>描边不会跟着圆角走，而<code>box-shadow</code>则是会的这两个特性，代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">background: tan;</span><br><span class="line">border-radius: .8em;</span><br><span class="line">padding: 1em;</span><br><span class="line">box-shadow: 0 0 0 .6em #655;</span><br><span class="line">outline: .6em solid #655;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/css-secret5" alt><br>这个效果如果采用两个元素，我们可以很容易地实现，那如果想利用前面的知识用一个元素实现呢？<br>我们需要利用<code>outline</code>描边不会跟着圆角走，而<code>box-shadow</code>则是会的这两个特性，代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">background: tan;</span><br><span class="line">border-radius: .8em;</span><br><span class="line">padding: 1em;</span><br><span class="line">box-shadow: 0 0 0 .6em #655;</span><br><span class="line">outline: .6em solid #655;</span><br></pre></td></tr></table></figure></p>
 <p>这里的box-shadow的扩张值可以直接使用圆角值的一半</p>
 <blockquote>
 <p>这个方案依赖的特性是描边不跟着圆角走，但以后可能会修改，所以无法保证这种行为会永远不变</p>
 </blockquote>
 <h3 id="5-条纹背景"><a href="#5-条纹背景" class="headerlink" title="5. 条纹背景"></a>5. 条纹背景</h3><h4 id="水平条纹"><a href="#水平条纹" class="headerlink" title="水平条纹"></a>水平条纹</h4><p>利用css线性渐变属性<code>linear-gradient</code>属性和<code>background-size</code>，我们可以实现本来需要用背景图片才能实现的好看的条纹背景</p>
 <p>基础的渐变情况是这样的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3, #58a)</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/css-secret6" alt=""><br>如果我们将这两个色标拉近一点:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 20%, #58a 80%)</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/css-secret7" alt=""><br>20% 80%表示#fb3到#58a的渐变区域为20%-80%,其它位置都为实色，<br>40% 60%表示渐变区域仅为40%-60%之间,<br>50% 50%则表示全部区域都为实色区域了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 50%, #58a 50%);</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/css-secret8" alt=""><br>渐变是一种由代码生成的图像，我们能像对待其它任何背景图像那样来对待它，增加<code>background-size</code>来调整尺寸:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 50%, #58a 50%);</span><br><span class="line"># 100% 表示宽度， 30px表示高度</span><br><span class="line">background-size: 100% 30px;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/css-secret6" alt><br>如果我们将这两个色标拉近一点:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 20%, #58a 80%)</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/css-secret7" alt><br>20% 80%表示#fb3到#58a的渐变区域为20%-80%,其它位置都为实色，<br>40% 60%表示渐变区域仅为40%-60%之间,<br>50% 50%则表示全部区域都为实色区域了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 50%, #58a 50%);</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/css-secret8" alt><br>渐变是一种由代码生成的图像，我们能像对待其它任何背景图像那样来对待它，增加<code>background-size</code>来调整尺寸:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 50%, #58a 50%);</span><br><span class="line"># 100% 表示宽度， 30px表示高度</span><br><span class="line">background-size: 100% 30px;</span><br></pre></td></tr></table></figure></p>
 <p>默认是重复平铺的,效果图如下：</p>
-<p><img src="/images/css-secret9" alt=""><br>创建不等宽的条纹:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 30%, #58a 30%);</span><br><span class="line">background-size: 100% 30px;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/css-secret10" alt=""><br>为了避免每次改动条纹宽度都需要改动两个数字，我们可以根据以下规范对代码进行调整</p>
+<p><img src="/images/css-secret9" alt><br>创建不等宽的条纹:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 30%, #58a 30%);</span><br><span class="line">background-size: 100% 30px;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/css-secret10" alt><br>为了避免每次改动条纹宽度都需要改动两个数字，我们可以根据以下规范对代码进行调整</p>
 <blockquote>
 <p>如果某个色标的位置值比整个列表中在它之前的色标的位置值都要小，则该色标的位置值会被设置为它前面所有色标位置值的最大值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 30%, #58a 0);</span><br><span class="line">background-size: 100% 30px;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <p>这样可以实现跟上图一样的结果，但代码会更加DRY<br>如果要创建三种颜色但水平条纹，也是很简单的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(#fb3 33.3%, #58a 0, #58a 66.6%, yellowgreen 0);</span><br><span class="line">background-size: 100% 45px;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/css-secret11" alt=""></p>
+<p><img src="/images/css-secret11" alt></p>
 <h4 id="垂直条纹"><a href="#垂直条纹" class="headerlink" title="垂直条纹"></a>垂直条纹</h4><p>只需要增加一个参数就可以实现，即渐变的角度(方向)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(to right, #fb3 50%, #58a 0);</span><br><span class="line">background-size: 30px 100%;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/css-secret12" alt=""></p>
+<p><img src="/images/css-secret12" alt></p>
 <h4 id="斜向条纹"><a href="#斜向条纹" class="headerlink" title="斜向条纹"></a>斜向条纹</h4><p>按照上面的思路，我们写出了下面的代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(45deg, #fb3 50%, #58a 0);</span><br><span class="line">background-size: 30px 30px;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/css-secret13" alt=""></p>
+<p><img src="/images/css-secret13" alt></p>
 <p>好像结果跟想象的不太一样，正确的思路应该是增加2个色块，一个贴片包含4条条纹，而不是两条<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75% #58a 0);</span><br><span class="line">background-size: 30px 30px;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/css-secret14" alt=""><br>这时我们又发现另一个问题，条纹比预想的要细，那么background-size的宽高应该如何计算呢?<br>根据勾股定理计算得(具体过程不详细说明),如果想让条纹宽度为15px,就需要把background-size指定为2x15√2, 大约为42.4px<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75% #58a 0);</span><br><span class="line">background-size: 42px 42px;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/css-secret15" alt=""></p>
+<p><img src="/images/css-secret14" alt><br>这时我们又发现另一个问题，条纹比预想的要细，那么background-size的宽高应该如何计算呢?<br>根据勾股定理计算得(具体过程不详细说明),如果想让条纹宽度为15px,就需要把background-size指定为2x15√2, 大约为42.4px<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75% #58a 0);</span><br><span class="line">background-size: 42px 42px;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/css-secret15" alt></p>
 <h4 id="更好的斜向条纹"><a href="#更好的斜向条纹" class="headerlink" title="更好的斜向条纹"></a>更好的斜向条纹</h4><p>根据上面创造斜向条纹的方法，如果我们想让条纹的角度是60度的话怎么办，若是单纯只改变角度似乎不能实现</p>
-<p><img src="/images/css-secret16" alt=""></p>
+<p><img src="/images/css-secret16" alt></p>
 <p>其实我们有更好的方法来创建斜向条纹, 即<code>repeating-linear-gradient()</code>，它的工作方式与<code>linear-gradient()</code>类似，只有一点不同：色标是无限循环重复的，直到填满整个背景,因此我们想实现的60度斜向条纹这样写即可:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: repeating-linear-gradient(60deg, #fb3, #fb3 15px, #58a 0, #58a 30px);</span><br></pre></td></tr></table></figure></p>
 
       

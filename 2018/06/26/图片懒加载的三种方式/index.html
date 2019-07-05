@@ -6,10 +6,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -86,12 +86,12 @@
 <meta property="og:site_name" content="林莉的博客">
 <meta property="og:description" content="实现思路 在页面放置img标签 给img图片加上alt, width, height 和 data-src 通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src  offsetTop方式图片出现在视窗内的情况：offsetTop &amp;lt; clientHeight + scrollTop  getBoundingClientRect方式图片出现在视窗内的情况：ele">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/23/162f0988f351ecca?imageslim">
-<meta property="og:updated_time" content="2018-06-29T03:06:23.422Z">
+<meta property="og:image" content="http://yoursite.com/images/lazy-load">
+<meta property="og:updated_time" content="2019-07-05T10:00:41.399Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图片懒加载的三种方式">
 <meta name="twitter:description" content="实现思路 在页面放置img标签 给img图片加上alt, width, height 和 data-src 通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src  offsetTop方式图片出现在视窗内的情况：offsetTop &amp;lt; clientHeight + scrollTop  getBoundingClientRect方式图片出现在视窗内的情况：ele">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/4/23/162f0988f351ecca?imageslim">
+<meta name="twitter:image" content="http://yoursite.com/images/lazy-load">
 
 
 
@@ -121,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/26/图片懒加载的三种方式/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/26/图片懒加载的三种方式/">
 
 
 
@@ -155,7 +155,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">林莉的博客</span>
         <span class="logo-line-after"><i></i></span>
@@ -185,7 +185,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -195,7 +195,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -238,7 +238,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="linli">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -307,7 +307,7 @@
 <li>通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src</li>
 </ul>
 <h3 id="offsetTop方式"><a href="#offsetTop方式" class="headerlink" title="offsetTop方式"></a>offsetTop方式</h3><p>图片出现在视窗内的情况：<br>offsetTop &lt; clientHeight + scrollTop</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f0988f351ecca?imageslim" alt=""></p>
+<p><img src="/images/lazy-load" alt></p>
 <h3 id="getBoundingClientRect方式"><a href="#getBoundingClientRect方式" class="headerlink" title="getBoundingClientRect方式"></a>getBoundingClientRect方式</h3><p>图片出现在视窗内的情况：<br>element.getBoundingClientRect().top &lt; clientHeightf</p>
 <h3 id="h5的IntersectionObserver方式"><a href="#h5的IntersectionObserver方式" class="headerlink" title="h5的IntersectionObserver方式"></a>h5的IntersectionObserver方式</h3><ul>
 <li>intersectionRatio：目标元素的可见比例，即 intersectionRect 占 boundingClientRect 的比例，完全可见时为 1 ，完全不可见时小于等于 0</li>
