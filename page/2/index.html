@@ -229,145 +229,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/图片懒加载的三种方式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="linli">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="林莉的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/26/图片懒加载的三种方式/" itemprop="url">图片懒加载的三种方式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-26T17:39:48+08:00">
-                2018-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><ul>
-<li>在页面放置img标签</li>
-<li>给img图片加上alt, width, height 和 data-src</li>
-<li>通过js判断页面是否滚动到某张图片需要显示的位置，这时将src赋值为data-src</li>
-</ul>
-<h3 id="offsetTop方式"><a href="#offsetTop方式" class="headerlink" title="offsetTop方式"></a>offsetTop方式</h3><p>图片出现在视窗内的情况：<br>offsetTop &lt; clientHeight + scrollTop</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f0988f351ecca?imageslim" alt=""></p>
-<h3 id="getBoundingClientRect方式"><a href="#getBoundingClientRect方式" class="headerlink" title="getBoundingClientRect方式"></a>getBoundingClientRect方式</h3><p>图片出现在视窗内的情况：<br>element.getBoundingClientRect().top &lt; clientHeightf</p>
-<h3 id="h5的IntersectionObserver方式"><a href="#h5的IntersectionObserver方式" class="headerlink" title="h5的IntersectionObserver方式"></a>h5的IntersectionObserver方式</h3><ul>
-<li>intersectionRatio：目标元素的可见比例，即 intersectionRect 占 boundingClientRect 的比例，完全可见时为 1 ，完全不可见时小于等于 0</li>
-</ul>
-<p>具体用法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function getTag(tag) &#123;</span><br><span class="line">    return Array.from(document.getElementsByTagName(tag));</span><br><span class="line">&#125;</span><br><span class="line">var observer = new IntersectionObserver(</span><br><span class="line">    (changes) =&gt; &#123;</span><br><span class="line">        changes.forEach((change) =&gt; &#123;</span><br><span class="line">            if (change.intersectionRatio &gt; 0) &#123;</span><br><span class="line">                var img = change.target;</span><br><span class="line">                img.src = img.dataset.src;</span><br><span class="line">                observer.unobserve(img);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">getTag(&apos;img&apos;).forEach((item) =&gt; &#123;</span><br><span class="line">    observer.observe(item);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><ul>
-<li><p>通过以下css可以提高性能</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 之所以使用visibility而不是display是因为</span><br><span class="line"># visibility不会触发重绘(repaint)和重排(reflow)</span><br><span class="line">img &#123;</span><br><span class="line">  visibility: hidden;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">img[src] &#123;</span><br><span class="line">  visibility: visible;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>因为scroll事件的触发频率很高，频繁操作dom结点会造成很大的性能问题，所以需要做节流和防抖设计，减少scroll事件的触发频率</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/小程序开发日记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -461,6 +322,19 @@
 <li>通过getCurrentPages()获取</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">onLoad () &#123;</span><br><span class="line">  let pages = getCurrentPages()</span><br><span class="line">  let prevPage = pages[pages.length - 2]</span><br><span class="line">  this.setData(&#123;detail: prevPage.data.detail&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="附上踩坑总结"><a href="#附上踩坑总结" class="headerlink" title="附上踩坑总结"></a>附上踩坑总结</h4><ol>
+<li><p>button直接设置border: none无效，解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">button:after &#123;</span><br><span class="line">    border: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置字体大小后高度与字体大小不一致，解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">font-size: 16px;</span><br><span class="line">line-height: 16px;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>text的wxml文件周围不能有空行，不然样式会与想象中不一致</p>
+</li>
+<li>小程序的扩展运算符写在变量后面</li>
+<li>scroll-view 组件直接子元素设置box-shadow无效。经过试验和验证，发现scroll-view组件有个类似和overflow: hidden样式的设置，且去不掉。<br>解决方案: 在scroll-view里加了个view标签</li>
+<li>小程序通过<code>animation</code>实现<code>picker</code>动画时，出现类名与变量名不一致导致动画卡顿问题，目前不知道是什么原因导致的</li>
+</ol>
 <p>未完待续…</p>
 
           
@@ -588,9 +462,9 @@
 </ul>
 <h3 id="开始实现"><a href="#开始实现" class="headerlink" title="开始实现"></a>开始实现</h3><h4 id="obs的使用"><a href="#obs的使用" class="headerlink" title="obs的使用"></a>obs的使用</h4><p>obs的下载请移步<a href="https://obsproject.com/" target="_blank" rel="noopener">官网</a>，有windows, mac, linux 三个平台的版本可供下载<br>我这里使用的是mac版，其他版本的使用应该也差不多</p>
 <ul>
-<li>首先需要新建一个场景<br><img src="https://upload-images.jianshu.io/upload_images/11543643-e3898c40c5fdf380.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建场景.png"><br>这里有很多种场景可以使用，我用显示捕获来示范一下吧…<br><img src="https://upload-images.jianshu.io/upload_images/11543643-832208bc792de999.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建场景.png"><br>可以对场景进行命名，我直接使用默认的名字，点击确定<br><img src="https://upload-images.jianshu.io/upload_images/11543643-80bcfcca543f70ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新建场景.png"></li>
+<li>首先需要新建一个场景<br><img src="../../images/obs1.png" alt="新建场景.png"><br>这里有很多种场景可以使用，我用显示捕获来示范一下吧…<br><img src="../../images/obs2.png" alt="新建场景.png"><br>可以对场景进行命名，我直接使用默认的名字，点击确定<br><img src="../../images/obs3.png" alt="新建场景.png"></li>
 </ul>
-<p>再次点击确定，这个时候场景就创建成功了，拖动场景可以将场景进行缩放，缩放到遮住黑色的背景就好了<br><img src="https://upload-images.jianshu.io/upload_images/11543643-c7a8baae2b871c92.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="缩放场景.png"></p>
+<p>再次点击确定，这个时候场景就创建成功了，拖动场景可以将场景进行缩放，缩放到遮住黑色的背景就好了<br><img src="../../images/obs4.png" alt="缩放场景.png"></p>
 <ul>
 <li>推流<br>视频的本质其实是一张张截下来的图片，我们需要将这一张张图片放到一个地方，然后前端就可以从这个地方读取，从而展示出来，因此在这之前我们需要开启一个服务，作为前端获取视频的源地址</li>
 </ul>
@@ -605,7 +479,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node index.js</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>如果看到下面的提示，表示我们已经成功开启node-media-server服务了<br><img src="https://upload-images.jianshu.io/upload_images/11543643-9472617ff06096a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="开启服务.png"></p>
+<p>如果看到下面的提示，表示我们已经成功开启node-media-server服务了<br><img src="../../images/obs5.png" alt="开启服务.png"></p>
 <h4 id="flv-js"><a href="#flv-js" class="headerlink" title="flv.js"></a>flv.js</h4><p>flv.js是来自Bilibli的开源项目。它解析FLV文件喂给原生HTML5 Video标签播放音视频数据，使浏览器在不借助Flash的情况下播放FLV成为可能。具体的介绍请自行google哈，继续刚才的项目</p>
 <ul>
 <li>新建一个index.html文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">	&lt;title&gt;直播&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;script src=&quot;https://cdn.bootcss.com/flv.js/1.4.0/flv.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;video id=&quot;videoElement&quot; width=&quot;100%&quot; controls&gt;&lt;/video&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        if (flvjs.isSupported()) &#123;</span><br><span class="line">            var videoElement = document.getElementById(&apos;videoElement&apos;);</span><br><span class="line">            var flvPlayer = flvjs.createPlayer(&#123;</span><br><span class="line">                type: &apos;flv&apos;,</span><br><span class="line">                url: &apos;http://localhost:8000/live/hello.flv&apos;</span><br><span class="line">            &#125;);</span><br><span class="line">            flvPlayer.attachMediaElement(videoElement);</span><br><span class="line">            flvPlayer.load();</span><br><span class="line">            flvPlayer.play();</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
@@ -620,9 +494,9 @@
 <blockquote>
 <p>我们也可以通过bilibili等直播平台进行播放，这里就填写你bilibili上的直播链接和名称</p>
 </blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/11543643-4896159d8e19ce11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="../../images/obs6.png" alt="image.png"></p>
 <ul>
-<li>点击obs的开始推流按钮<br><img src="https://upload-images.jianshu.io/upload_images/11543643-2aa25cf702854ee5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+<li>点击obs的开始推流按钮<br><img src="../../images/obs7.png" alt="image.png"></li>
 </ul>
 <p>这时双击在浏览器打开index.html就可以看到直播啦，记得点击视频下方的开始按钮~</p>
 
@@ -1231,7 +1105,7 @@
 <h4 id="常见的响应式布局"><a href="#常见的响应式布局" class="headerlink" title="常见的响应式布局"></a>常见的响应式布局</h4><ol>
 <li>column drop(掉落列模型)</li>
 </ol>
-<p> <img src="https://upload-images.jianshu.io/upload_images/11543643-840125911de014c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="column drop模型.png"></p>
+<p> <img src="../../images/responsive.jpeg" alt="column drop模型.png"></p>
 <ul>
 <li><p>小屏幕设备布局核心代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-wrap: wrap;</span><br><span class="line">&#125;</span><br><span class="line">.box &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1244,21 +1118,21 @@
 </li>
 </ul>
 <ol start="2">
-<li>mostly fluid (大体流动模型)<br>mostly fluid 跟 column drop 很类似，只是在column drop的基础上，在最大尺寸时两边增加margin<br><img src="https://upload-images.jianshu.io/upload_images/11543643-a66f7dbf42b3216b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mostly fluid模型.png"></li>
+<li>mostly fluid (大体流动模型)<br>mostly fluid 跟 column drop 很类似，只是在column drop的基础上，在最大尺寸时两边增加margin<br><img src="../../images/responsive-fluid.jpeg" alt="mostly fluid模型.png"></li>
 </ol>
 <ul>
 <li>大屏幕时的核心代码如下:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  width: 700px;</span><br><span class="line">  margin-left: auto;</span><br><span class="line">  margin-right: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ol start="3">
-<li>layout shifter(布局切换器)<br>layout shifter跟column drop也很类似，不同于column drop, layout shifter增加了order来调整div的顺序<br><img src="https://upload-images.jianshu.io/upload_images/11543643-23cf884272df7ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="layout shifter模型.png"></li>
+<li>layout shifter(布局切换器)<br>layout shifter跟column drop也很类似，不同于column drop, layout shifter增加了order来调整div的顺序<br><img src="../../images/responsive-shifter.jpeg" alt="layout shifter模型.png"></li>
 </ol>
 <ul>
 <li>大屏幕时的核心代码如下:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@media sceen and (min-width: 600px) &#123;</span><br><span class="line">  .dark &#123;</span><br><span class="line">    width: 25%;</span><br><span class="line">    order: 1;</span><br><span class="line">  &#125;</span><br><span class="line">  .container 2 &#123;</span><br><span class="line">    width: 50%;</span><br><span class="line">  &#125;</span><br><span class="line">  .red &#123;</span><br><span class="line">     width: 25%;</span><br><span class="line">     order: -1;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ol start="4">
-<li>off canvas (画布之外模型)<br>off canvas模型较为常见，先在小屏幕中隐藏导航栏等使用频率不高的组件，然后通过点击某个图标才显示导航栏<br><img src="https://upload-images.jianshu.io/upload_images/11543643-38821b968c6d4143.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="off canvas模型.png"></li>
+<li>off canvas (画布之外模型)<br>off canvas模型较为常见，先在小屏幕中隐藏导航栏等使用频率不高的组件，然后通过点击某个图标才显示导航栏<br><img src="../../images/responsive-canvas.jpeg" alt="off canvas模型.png"></li>
 </ol>
 <ul>
 <li><p>小屏幕中的核心实现代码如下：</p>
@@ -1274,9 +1148,9 @@
 <h4 id="响应式表格"><a href="#响应式表格" class="headerlink" title="响应式表格"></a>响应式表格</h4><p>虽然表格布局已经几乎被我们摒弃掉了，但是还是有一些需求需要用到表格来展示数据，比如篮球比赛的分数等，那么响应式表格要怎么实现呢？</p>
 <ol>
 <li>隐藏某些不重要的列，也就是设置为<code>display: none</code>(so easy, right?)</li>
-<li>将纵向排列转为横向排列<br>举个例子：<br><img src="https://upload-images.jianshu.io/upload_images/11543643-6c1acecb4374b6c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="纵向排列表格.png"></li>
+<li>将纵向排列转为横向排列<br>举个例子：<br><img src="../../images/responsive-table.jpeg" alt="纵向排列表格.png"></li>
 </ol>
-<p><img src="https://upload-images.jianshu.io/upload_images/11543643-05b46df25e70d2d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="横向排列表格.png"><br>实现的核心代码如下：</p>
+<p><img src="../../images/responsive-table.jpeg" alt="横向排列表格.png"><br>实现的核心代码如下：</p>
 <ul>
 <li><p>html结构：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">      &lt;thead&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;th&gt;Team&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;1st&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;2nd&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;3rd&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;4th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;5th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;6th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;7th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;8th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;9th&lt;/th&gt;</span><br><span class="line">          &lt;th&gt;Final&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">      &lt;/thead&gt;</span><br><span class="line">      &lt;tbody&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td data-th=&quot;Team&quot;&gt;Toronto&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;1st&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;2nd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;3rd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;4th&quot;&gt;4&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;5th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;6th&quot;&gt;1&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;7th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;8th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;9th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;Final&quot;&gt;5&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td data-th=&quot;Team&quot;&gt;San Francisco&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;1st&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;2nd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;3rd&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;4th&quot;&gt;4&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;5th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;6th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;7th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;8th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;9th&quot;&gt;0&lt;/td&gt;</span><br><span class="line">          &lt;td data-th=&quot;Final&quot;&gt;4&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">      &lt;/tbody&gt;</span><br></pre></td></tr></table></figure>
@@ -1376,7 +1250,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

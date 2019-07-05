@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="林莉的博客">
 <meta property="og:description" content="最近在学小程序开发，想做一个小demo练练手，边学边总结，希望能对以后想学的同学有点作用： request请求豆瓣图书接口报了403查资料后才知道豆瓣图书的接口对小程序不开放了…用了同事反向代理豆瓣api的接口才搞定的 request请求同事服务器的接口报了400通过wx.request请求资源时需要加上header头部123header: &amp;#123;  &amp;quot;Content-Type&amp;q">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-22T09:28:05.747Z">
+<meta property="og:updated_time" content="2019-07-05T09:26:04.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小程序开发日记">
 <meta name="twitter:description" content="最近在学小程序开发，想做一个小demo练练手，边学边总结，希望能对以后想学的同学有点作用： request请求豆瓣图书接口报了403查资料后才知道豆瓣图书的接口对小程序不开放了…用了同事反向代理豆瓣api的接口才搞定的 request请求同事服务器的接口报了400通过wx.request请求资源时需要加上header头部123header: &amp;#123;  &amp;quot;Content-Type&amp;q">
@@ -321,6 +321,19 @@
 <li>通过getCurrentPages()获取</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">onLoad () &#123;</span><br><span class="line">  let pages = getCurrentPages()</span><br><span class="line">  let prevPage = pages[pages.length - 2]</span><br><span class="line">  this.setData(&#123;detail: prevPage.data.detail&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="附上踩坑总结"><a href="#附上踩坑总结" class="headerlink" title="附上踩坑总结"></a>附上踩坑总结</h4><ol>
+<li><p>button直接设置border: none无效，解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">button:after &#123;</span><br><span class="line">    border: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置字体大小后高度与字体大小不一致，解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">font-size: 16px;</span><br><span class="line">line-height: 16px;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>text的wxml文件周围不能有空行，不然样式会与想象中不一致</p>
+</li>
+<li>小程序的扩展运算符写在变量后面</li>
+<li>scroll-view 组件直接子元素设置box-shadow无效。经过试验和验证，发现scroll-view组件有个类似和overflow: hidden样式的设置，且去不掉。<br>解决方案: 在scroll-view里加了个view标签</li>
+<li>小程序通过<code>animation</code>实现<code>picker</code>动画时，出现类名与变量名不一致导致动画卡顿问题，目前不知道是什么原因导致的</li>
+</ol>
 <p>未完待续…</p>
 
       
@@ -435,7 +448,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -491,7 +504,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#request请求豆瓣图书接口报了403"><span class="nav-number">1.</span> <span class="nav-text">request请求豆瓣图书接口报了403</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#request请求同事服务器的接口报了400"><span class="nav-number">2.</span> <span class="nav-text">request请求同事服务器的接口报了400</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何将上一个页面的数据传递给跳转到的下一个页面"><span class="nav-number">3.</span> <span class="nav-text">如何将上一个页面的数据传递给跳转到的下一个页面</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#request请求豆瓣图书接口报了403"><span class="nav-number">1.</span> <span class="nav-text">request请求豆瓣图书接口报了403</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#request请求同事服务器的接口报了400"><span class="nav-number">2.</span> <span class="nav-text">request请求同事服务器的接口报了400</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何将上一个页面的数据传递给跳转到的下一个页面"><span class="nav-number">3.</span> <span class="nav-text">如何将上一个页面的数据传递给跳转到的下一个页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#附上踩坑总结"><span class="nav-number">4.</span> <span class="nav-text">附上踩坑总结</span></a></li></ol></div>
             
 
           </div>
